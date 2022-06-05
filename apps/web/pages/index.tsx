@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Head from "next/head";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
@@ -6,6 +7,13 @@ export default function Web() {
   return (
     <>
       <Navbar />
+      <Head>
+        <title>Automate Payments Seamlessly | Paymony</title>
+        <meta
+          name='description'
+          content='Automate Payments Seamlessly with Paymony'
+        />
+      </Head>
       <section className='text-white bg-gray-900'>
         <div className='max-w-screen-xl px-4 py-32 mx-auto sm:px-6 lg:px-8 lg:h-screen lg:items-center lg:flex'>
           <div className='max-w-3xl mx-auto text-center'>
