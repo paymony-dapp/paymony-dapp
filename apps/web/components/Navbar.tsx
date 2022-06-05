@@ -1,0 +1,52 @@
+import React from "react";
+
+const Navbar = () => {
+  return (
+    <header className='bg-gray-900 py-2 fixed top-0 inset-x-0'>
+      <div className='max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8'>
+        <div className='flex items-center justify-between h-16'>
+          <div className='md:flex md:items-center md:gap-12'>
+            <a
+              className='block text-transparent text-lg md:text-2xl italic bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'
+              href='/'
+            >
+              <h2 className='font-semibold'>Paymony</h2>
+            </a>
+          </div>
+
+          <div className='flex items-center gap-4'>
+            <div className='sm:gap-4 sm:flex'>
+              <a
+                className='block w-full px-8 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring'
+                href='/'
+              >
+                Get Started
+              </a>
+            </div>
+
+            <div className='block md:hidden'>
+              <button className='p-2 text-white transition bg-gray-800 rounded hover:text-white/75'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='w-5 h-5'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M4 6h16M4 12h16M4 18h16'
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;
