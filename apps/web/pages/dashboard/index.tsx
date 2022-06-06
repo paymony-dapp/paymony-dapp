@@ -74,8 +74,10 @@ const Dashboard = () => {
               <Image
                 width={40}
                 height={40}
-                className='object-cover bg-black rounded-full'
-                src='/ima.png'
+                className='object-cover bg-slate-100 rounded-full'
+                src={`https://avatars.dicebear.com/api/identicon/${
+                  Math.random() * 100
+                }.svg`}
                 alt='Simon Lewis'
               />
             </a>
