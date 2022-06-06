@@ -2,6 +2,7 @@ import Image from "next/image";
 import Head from "next/head";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import Link from "next/link";
 
 export default function Web() {
   return (
@@ -28,12 +29,11 @@ export default function Web() {
             </p>
 
             <div className='flex flex-wrap justify-center gap-4 mt-8'>
-              <a
-                className='block w-full px-12 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring'
-                href='/get-started'
-              >
-                Get Started
-              </a>
+              <Link href='/dashboard'>
+                <a className='block w-full px-12 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring'>
+                  Get Started
+                </a>
+              </Link>
 
               <a
                 className='block w-full px-12 py-3 text-sm font-medium text-white border border-blue-600 rounded sm:w-auto hover:bg-blue-600 active:bg-blue-500 focus:outline-none focus:ring'
@@ -60,27 +60,26 @@ export default function Web() {
                 aliquid tempora. Obcaecati, autem.
               </p>
 
-              <a
-                className='inline-flex items-center px-8 py-3 mt-8 text-white bg-indigo-600 border border-indigo-600 rounded hover:bg-transparent hover:text-indigo-600 active:text-indigo-500 focus:outline-none focus:ring'
-                href='/get-started'
-              >
-                <span className='text-sm font-medium'> Get Started </span>
+              <Link href='/dashboard'>
+                <a className='inline-flex items-center px-8 py-3 mt-8 text-white bg-blue-600 border border-blue-600 rounded hover:bg-transparent hover:text-blue-600 active:text-blue-500 focus:outline-none focus:ring'>
+                  <span className='text-sm font-medium'> Get Started </span>
 
-                <svg
-                  className='w-5 h-5 ml-3'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M17 8l4 4m0 0l-4 4m4-4H3'
-                  />
-                </svg>
-              </a>
+                  <svg
+                    className='w-5 h-5 ml-3'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
+                      d='M17 8l4 4m0 0l-4 4m4-4H3'
+                    />
+                  </svg>
+                </a>
+              </Link>
             </div>
 
             <div className='grid grid-cols-2 gap-4 sm:grid-cols-3'>
@@ -243,6 +242,45 @@ export default function Web() {
           </div>
         </div>
       </section>
+      <section className='p-6 py-28 bg-gray-900'>
+        <section className='max-w-screen-xl mx-auto'>
+          <span className='block mb-2 text-xs font-medium tracking-widest text-center uppercase dark:text-blue-400'>
+            How it works
+          </span>
+          <h2 className='text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 lg:w-2/5 mx-auto'>
+            Automating Payments is simple
+          </h2>
+          <div className='grid gap-6 my-16 lg:grid-cols-3'>
+            <div className='flex flex-col p-8 space-y-4 rounded-md dark:bg-blue-900'>
+              <div className='flex items-center justify-center flex-shrink-0 w-12 h-12 text-xl font-bold rounded-full dark:bg-blue-300 dark:text-coolGray-900'>
+                1
+              </div>
+              <p className='text-2xl font-semibold text-zinc-50'>
+                <b className='italic'>Sign.</b> Connect your wallet to your
+                dashboard
+              </p>
+            </div>
+            <div className='flex flex-col p-8 space-y-4 rounded-md dark:bg-blue-900'>
+              <div className='flex items-center justify-center flex-shrink-0 w-12 h-12 text-xl font-bold rounded-full dark:bg-blue-300 dark:text-coolGray-900'>
+                2
+              </div>
+              <p className='text-2xl font-semibold text-zinc-50'>
+                <b className='italic'>Register.</b> Add the Payment Destination
+                and set a time interval
+              </p>
+            </div>
+            <div className='flex flex-col p-8 space-y-4 rounded-md dark:bg-blue-900'>
+              <div className='flex items-center justify-center flex-shrink-0 w-12 h-12 text-xl font-bold rounded-full dark:bg-blue-300'>
+                3
+              </div>
+              <p className='text-2xl font-semibold text-zinc-50'>
+                <b className='italic'>Automate.</b> Relax as Paymony handles
+                payments across multiple platforms for you
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
       <section className='relative overflow-hidden text-gray-300 bg-gray-900'>
         <div className='lg:flex max-w-screen-xl mx-auto'>
           <div className='w-full p-12 text-center lg:w-1/2 sm:p-16 lg:p-24 lg:text-left'>
@@ -260,12 +298,11 @@ export default function Web() {
                 quisque ut interdum tincidunt duis.
               </p>
 
-              <a
-                href=''
-                className='inline-block mt-4 px-8 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring'
-              >
-                Get started today
-              </a>
+              <Link href='/dashboard'>
+                <a className='inline-block mt-4 px-8 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring'>
+                  Get started today
+                </a>
+              </Link>
             </div>
           </div>
 
