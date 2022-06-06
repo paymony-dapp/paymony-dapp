@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
@@ -16,31 +17,11 @@ const Navbar = () => {
 
           <div className='flex items-center gap-4'>
             <div className='sm:gap-4 sm:flex'>
-              <a
-                className='block w-full px-8 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring'
-                href='/'
-              >
-                Get Started
-              </a>
-            </div>
-
-            <div className='block md:hidden'>
-              <button className='p-2 text-white transition bg-gray-800 rounded hover:text-white/75'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='w-5 h-5'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                  strokeWidth='2'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M4 6h16M4 12h16M4 18h16'
-                  />
-                </svg>
-              </button>
+              <Link href='/dashboard'>
+                <a className='block w-full px-8 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring'>
+                  Get Started
+                </a>
+              </Link>
             </div>
           </div>
         </div>
