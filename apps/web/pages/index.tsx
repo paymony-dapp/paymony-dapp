@@ -9,10 +9,10 @@ export default function Web() {
     <>
       <Navbar />
       <Head>
-        <title>Automate Payments Seamlessly | Paymony</title>
+        <title>Automate Payments Seamlessly | Paymoni</title>
         <meta
           name='description'
-          content='Automate Payments Seamlessly with Paymony'
+          content='Automate Payments Seamlessly with Paymoni'
         />
       </Head>
       <section className='text-white bg-gray-900'>
@@ -24,7 +24,7 @@ export default function Web() {
             </h1>
 
             <p className='max-w-xl mx-auto mt-4 sm:leading-relaxed sm:text-xl'>
-              Paymony is a payment platform that combines the blockchain
+              Paymoni is a payment platform that combines the blockchain
               technology to create frictionless automated payments.
             </p>
 
@@ -274,7 +274,7 @@ export default function Web() {
                 3
               </div>
               <p className='text-2xl font-semibold text-zinc-50'>
-                <b className='italic'>Automate.</b> Relax as Paymony handles
+                <b className='italic'>Automate.</b> Relax as Paymoni handles
                 payments across multiple platforms for you
               </p>
             </div>

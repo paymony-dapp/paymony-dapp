@@ -29,7 +29,7 @@ const Footer = () => {
         <div className='lg:flex lg:items-end lg:justify-between'>
           <div>
             <h2 className='flex justify-center text-transparent text-lg sm:text-2xl italic bg-clip-text bg-gradient-to-tr from-green-300 via-blue-500 to-purple-600 font-semibold lg:justify-start'>
-              Paymony
+              Paymoni
             </h2>
 
             <p className='max-w-md mx-auto mt-6 leading-relaxed text-center text-gray-400 lg:text-left'>

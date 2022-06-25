@@ -11,7 +11,7 @@ const Navbar = () => {
               className='block text-transparent text-lg md:text-2xl italic bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'
               href='/'
             >
-              <h2 className='font-semibold'>Paymony</h2>
+              <h2 className='font-semibold'>Paymoni</h2>
             </a>
           </div>
 

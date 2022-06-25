@@ -6,7 +6,7 @@ const Layout: FC = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Paymony Dashboard</title>
+        <title>Paymoni Dashboard</title>
       </Head>
       <main className='w-full flex h-screen overflow-x-hidden overflow-y-auto bg-gray-900'>
         <Sidebar />
