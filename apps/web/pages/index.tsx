@@ -37,7 +37,7 @@ export default function Web() {
 
               <a
                 className='block w-full px-12 py-3 text-sm font-medium text-white border border-blue-600 rounded sm:w-auto hover:bg-blue-600 active:bg-blue-500 focus:outline-none focus:ring'
-                href='/about'
+                href='#about'
               >
                 Learn More
               </a>
@@ -45,7 +45,7 @@ export default function Web() {
           </div>
         </div>
       </section>
-      <section className='bg-gray-900'>
+      <section id='about' className='bg-gray-900'>
         <div className='max-w-screen-xl px-4 py-16 md:pb-32 lg:pb-56 sm:px-6 lg:px-8 mx-auto'>
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-x-16 lg:items-center'>
             <div className='max-w-lg mx-auto text-center lg:text-left lg:mx-0'>

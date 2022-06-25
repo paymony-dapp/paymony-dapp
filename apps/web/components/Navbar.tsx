@@ -19,7 +19,7 @@ const Navbar = () => {
             <div className='sm:gap-4 sm:flex'>
               <Link href='/dashboard'>
                 <a className='block w-full px-8 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring'>
-                  Get Started
+                  Visit Dashboard
                 </a>
               </Link>
             </div>
