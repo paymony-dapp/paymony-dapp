@@ -285,7 +285,9 @@ export default function Web() {
         <div className='lg:flex max-w-screen-xl mx-auto'>
           <div className='w-full p-12 text-center lg:w-1/2 sm:p-16 lg:p-24 lg:text-left'>
             <div className='max-w-xl mx-auto lg:ml-0'>
-              <p className='text-sm font-medium'>Lorem ipsum dolor sit amet.</p>
+              <p className='text-sm font-medium'>
+                Trustless Payments without constraints.
+              </p>
 
               <h2 className='mt-2 text-2xl font-bold text-transparent sm:text-3xl md:text-4xl bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'>
                 Convenient Trustless Payments without Constraints or Third Party
