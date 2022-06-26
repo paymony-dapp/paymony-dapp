@@ -288,7 +288,7 @@ export default function Web() {
               <p className='text-sm font-medium'>Lorem ipsum dolor sit amet.</p>
 
               <h2 className='mt-2 text-2xl font-bold text-transparent sm:text-3xl md:text-4xl bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit
+                Convenient Trustless Payments without Constraints or Third Party
               </h2>
 
               <p className='hidden lg:mt-4 lg:block'>

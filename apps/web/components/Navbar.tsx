@@ -7,12 +7,11 @@ const Navbar = () => {
       <div className='max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <div className='md:flex md:items-center md:gap-12'>
-            <a
-              className='block text-transparent text-lg md:text-2xl italic bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'
-              href='/'
-            >
-              <h2 className='font-semibold'>Paymoni</h2>
-            </a>
+            <Link href='/'>
+              <a className='block text-transparent text-lg md:text-2xl italic bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'>
+                <h2 className='font-semibold'>Paymoni</h2>
+              </a>
+            </Link>
           </div>
 
           <div className='flex items-center gap-4'>
