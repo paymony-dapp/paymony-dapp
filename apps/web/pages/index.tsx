@@ -1,8 +1,8 @@
-import Image from "next/image";
-import Head from "next/head";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
-import Link from "next/link";
+import Image from 'next/image';
+import Head from 'next/head';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+import Link from 'next/link';
 
 export default function Web() {
   return (
@@ -19,7 +19,7 @@ export default function Web() {
         <div className='max-w-screen-xl px-4 py-32 mx-auto sm:px-6 lg:px-8 lg:h-screen lg:items-center lg:flex'>
           <div className='max-w-3xl mx-auto text-center'>
             <h1 className='text-3xl font-extrabold text-transparent sm:text-5xl bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'>
-              Automated payments{" "}
+              Automated payments{' '}
               <span className='sm:block'>Powered by the blockchain. </span>
             </h1>
 
@@ -87,7 +87,7 @@ export default function Web() {
                 className='block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200'
                 href='/accountant'
               >
-                <span className='inline-block p-3 rounded-lg bg-gray-50'>
+                <span className='inline-block p-3 rounded-lg bg-gradient-to-br from-green-300 via-blue-500 to-purple-500'>
                   <svg
                     className='w-6 h-6'
                     fill='none'
@@ -106,14 +106,14 @@ export default function Web() {
                   </svg>
                 </span>
 
-                <h6 className='mt-2 font-bold text-zinc-200'>Accountant</h6>
+                <h6 className='mt-2 font-bold text-zinc-200'>Donations</h6>
               </a>
 
               <a
                 className='block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200'
                 href='/accountant'
               >
-                <span className='inline-block p-3 rounded-lg bg-gray-50'>
+                <span className='inline-block p-3 rounded-lg bg-gradient-to-br from-green-300 via-blue-500 to-purple-500'>
                   <svg
                     className='w-6 h-6'
                     fill='none'
@@ -132,14 +132,14 @@ export default function Web() {
                   </svg>
                 </span>
 
-                <h6 className='mt-2 font-bold text-zinc-200'>Accountant</h6>
+                <h6 className='mt-2 font-bold text-zinc-200'>Bills</h6>
               </a>
 
               <a
                 className='block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200'
                 href='/accountant'
               >
-                <span className='inline-block p-3 rounded-lg bg-gray-50'>
+                <span className='inline-block p-3 rounded-lg bg-gradient-to-br from-green-300 via-blue-500 to-purple-500'>
                   <svg
                     className='w-6 h-6'
                     fill='none'
@@ -158,14 +158,16 @@ export default function Web() {
                   </svg>
                 </span>
 
-                <h6 className='mt-2 font-bold text-zinc-200'>Accountant</h6>
+                <h6 className='mt-2 font-bold text-zinc-200'>
+                  DAO Contributions
+                </h6>
               </a>
 
               <a
                 className='block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200'
                 href='/accountant'
               >
-                <span className='inline-block p-3 rounded-lg bg-gray-50'>
+                <span className='inline-block p-3 rounded-lg bg-gradient-to-br from-green-300 via-blue-500 to-purple-500'>
                   <svg
                     className='w-6 h-6'
                     fill='none'
@@ -184,14 +186,14 @@ export default function Web() {
                   </svg>
                 </span>
 
-                <h6 className='mt-2 font-bold text-zinc-200'>Accountant</h6>
+                <h6 className='mt-2 font-bold text-zinc-200'>Fund raising</h6>
               </a>
 
               <a
                 className='block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200'
                 href='/accountant'
               >
-                <span className='inline-block p-3 rounded-lg bg-gray-50'>
+                <span className='inline-block p-3 rounded-lg bg-gradient-to-br from-green-300 via-blue-500 to-purple-500'>
                   <svg
                     className='w-6 h-6'
                     fill='none'
@@ -210,14 +212,14 @@ export default function Web() {
                   </svg>
                 </span>
 
-                <h6 className='mt-2 font-bold text-zinc-200'>Accountant</h6>
+                <h6 className='mt-2 font-bold text-zinc-200'>Streaming</h6>
               </a>
 
               <a
                 className='block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200'
                 href='/accountant'
               >
-                <span className='inline-block p-3 rounded-lg bg-gray-50'>
+                <span className='inline-block p-3 rounded-lg bg-gradient-to-br from-green-300 via-blue-500 to-purple-500'>
                   <svg
                     className='w-6 h-6'
                     fill='none'
@@ -236,7 +238,7 @@ export default function Web() {
                   </svg>
                 </span>
 
-                <h6 className='mt-2 font-bold text-zinc-200'>Accountant</h6>
+                <h6 className='mt-2 font-bold text-zinc-200'>Tickets</h6>
               </a>
             </div>
           </div>
