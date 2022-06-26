@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "next": "12.0.8",
+    "oak-js-library": "git+ssh://git@github.com:OAK-Foundation/OAK-JS-SDK.git#0.1.0-frontend",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "ui": "*"
