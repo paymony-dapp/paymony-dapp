@@ -1,6 +1,6 @@
-import Head from "next/head";
-import React, { FC } from "react";
-import Sidebar from "./Sidebar";
+import Head from 'next/head';
+import React, { FC } from 'react';
+import Sidebar from './Sidebar';
 
 const Layout: FC = ({ children }) => {
   return (

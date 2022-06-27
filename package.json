@@ -1,26 +1,30 @@
 {
-  "name": "paymony-dapp",
+  "name": "web",
   "version": "0.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.0.8",
+    "oak-js-library": "git+ssh://git@github.com:OAK-Foundation/OAK-JS-SDK.git#0.1.0-frontend",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "ui": "*"
   },
   "devDependencies": {
-    "eslint-config-custom": "latest",
-    "prettier": "latest",
-    "turbo": "latest"
-  },
-  "engines": {
-    "npm": ">=7.0.0",
-    "node": ">=14.0.0"
-  },
-  "dependencies": {},
-  "packageManager": "yarn@1.22.18"
+    "@types/node": "^17.0.12",
+    "@types/react": "17.0.37",
+    "autoprefixer": "^10.4.7",
+    "eslint": "7.32.0",
+    "eslint-config-custom": "*",
+    "next-transpile-modules": "9.0.0",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.0.24",
+    "tsconfig": "*",
+    "typescript": "^4.5.3"
+  }
 }
