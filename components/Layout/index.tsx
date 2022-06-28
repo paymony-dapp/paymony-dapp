@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React, { FC } from 'react';
+import Header from './Header';
 import Sidebar from './Sidebar';
 
 const Layout: FC = ({ children }) => {
@@ -10,7 +11,10 @@ const Layout: FC = ({ children }) => {
       </Head>
       <main className='w-full flex h-screen overflow-x-hidden overflow-y-auto bg-gray-900'>
         <Sidebar />
-        <div className='flex-1'>{children}</div>
+        <div className='flex-1'>
+          <Header />
+          {children}
+        </div>
       </main>
     </>
   );
