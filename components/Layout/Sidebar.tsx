@@ -21,7 +21,7 @@ const Sidebar = () => {
   const { pathname } = useRouter();
 
   return (
-    <aside className='flex flex-col w-60 h-screen bg-slate-900 border-r border-slate-800 pt-9 px-6'>
+    <aside className='hidden md:flex flex-col w-60 h-screen bg-slate-900 border-r border-slate-800 pt-9 px-6'>
       <Link href='/'>
         <a>
           <h1 className='block text-transparent text-lg md:text-2xl bg-clip-text bg-gradient-to-br from-green-300 via-blue-500 to-purple-600 font-semibold'>

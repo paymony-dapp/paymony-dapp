@@ -1,47 +1,22 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Header = () => {
   return (
     <header className='bg-gray-900'>
-      <div className='max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8'>
+      <div className='max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8 flex justify-between items-center md:block'>
+        <div className='md:hidden ml-2'>
+          <Link href='/'>
+            <a>
+              <h1 className='block text-transparent text-xl md:text-2xl bg-clip-text bg-gradient-to-br from-green-300 via-blue-500 to-purple-600 font-semibold'>
+                Paymony
+              </h1>
+            </a>
+          </Link>
+        </div>
         <div className='flex items-center justify-end gap-4'>
           <div className='flex items-center gap-4'>
-            <div className='relative'>
-              <label className='sr-only' htmlFor='search'>
-                {' '}
-                Search{' '}
-              </label>
-
-              <input
-                className='w-full h-10 pl-4 pr-10 text-sm bg-white border-none rounded-full shadow-sm sm:w-56'
-                id='search'
-                type='search'
-                placeholder='Search website...'
-              />
-
-              <button
-                className='absolute p-2 text-gray-600 transition -translate-y-1/2 rounded-full hover:text-gray-700 bg-gray-50 top-1/2 right-1'
-                type='button'
-                aria-label='Submit Search'
-              >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='w-4 h-4'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                  strokeWidth='2'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-                  />
-                </svg>
-              </button>
-            </div>
-
             <a
               href=''
               className='block p-2.5 text-gray-600 bg-white rounded-full hover:text-gray-700 shrink-0 shadow-sm'
