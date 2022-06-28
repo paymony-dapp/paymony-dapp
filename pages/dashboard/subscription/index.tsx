@@ -4,9 +4,9 @@ import Layout from '../../../components/Layout';
 const Subscription = () => {
   return (
     <Layout>
-      <div className='mx-auto max-w-screen-xl mt-8'>
+      <section className=''>
         <h1 className='text-zinc-100'>Hello Bomber</h1>
-      </div>
+      </section>
     </Layout>
   );
 };

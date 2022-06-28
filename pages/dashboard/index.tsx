@@ -5,7 +5,8 @@ import Layout from '../../components/Layout';
 const Dashboard = () => {
   return (
     <Layout>
-      <section className='grid sm:grid-col-2 md:grid-cols-3 lg:grid-col-4 gap-x-4 pt-20 max-w-screen-xl mx-auto'></section>
+      <h1 className='text-zinc-100 text-xl font-bold'>Dashboard</h1>
+      <section className='grid sm:grid-col-2 md:grid-cols-3 lg:grid-col-4 gap-x-4'></section>
     </Layout>
   );
 };

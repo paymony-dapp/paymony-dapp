@@ -34,10 +34,10 @@ const Sidebar = () => {
           <li key={index}>
             <Link href={route}>
               <a
-                className={`py-4 px-6 flex items-center text-white space-x-3 rounded-2xl ${
+                className={`py-4 px-6 flex items-center text-white space-x-3 rounded-2xl transition-colors duration-150 ${
                   pathname === route ||
                   pathname.replace('/dashboard', '').includes(route)
-                    ? 'bg-slate-800 text-gray-200'
+                    ? 'bg-slate-800 text-gray-50'
                     : 'text-gray-400 hover:filter hover:brightness-125 bg-slate-900'
                 }`}
               >

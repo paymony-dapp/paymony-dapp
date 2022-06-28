@@ -15,7 +15,7 @@ const Layout: FC = ({ children }) => {
         <Sidebar />
         <div className='flex-1'>
           <Header />
-          {children}
+          <main className='max-w-screen-xl mx-auto px-8'>{children}</main>
         </div>
       </main>
     </>
