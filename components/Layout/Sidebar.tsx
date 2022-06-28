@@ -35,7 +35,8 @@ const Sidebar = () => {
             <Link href={route}>
               <a
                 className={`py-4 px-6 flex items-center text-white space-x-3 rounded-2xl ${
-                  pathname === route || pathname.includes(route)
+                  pathname === route ||
+                  pathname.replace('/dashboard', '').includes(route)
                     ? 'bg-slate-800 text-gray-200'
                     : 'text-gray-400 hover:filter hover:brightness-125 bg-slate-900'
                 }`}
