@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React, { FC } from 'react';
+import ConnectWallet from '../EmptyState/ConnectWallet';
 import Header from './Header';
 import MobileNav from './MobileNav';
 import Sidebar from './Sidebar';
@@ -15,7 +16,10 @@ const Layout: FC = ({ children }) => {
         <Sidebar />
         <div className='flex-1'>
           <Header />
-          <main className='max-w-screen-xl mx-auto px-8'>{children}</main>
+          <main className='max-w-screen-xl mx-auto px-8 min-h-screen'>
+            <ConnectWallet />
+            {/* {children} */}
+          </main>
         </div>
       </main>
     </>
