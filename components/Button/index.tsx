@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button: FC<ButtonProps> = (
   { text, onClick, type = 'button', icon: Icon, variant = 'primary' },
-  ...props
+  props
 ) => {
   return (
     <button

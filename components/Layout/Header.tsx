@@ -3,13 +3,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Button from '../Button';
 import WalletIcon from '../Icons/WalletIcon';
+import { useWalletModal } from '../../store/walletModalStore';
 
 const Header = () => {
   const showProfile = false;
+  const toggleWalletModal = useWalletModal((state) => state.toggleModal);
   return (
     <header className='bg-gray-900'>
-      <div className='max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8 flex justify-between items-center md:block'>
-        <div className='md:hidden ml-2'>
+      <div className='max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8 flex justify-between items-center lg:block'>
+        <div className='lg:hidden ml-2'>
           <Link href='/'>
             <a>
               <h1 className='block text-transparent text-xl md:text-2xl bg-clip-text bg-gradient-to-br from-green-300 via-blue-500 to-purple-600 font-semibold'>
@@ -61,7 +63,11 @@ const Header = () => {
               </a>
             </>
           ) : (
-            <Button icon={WalletIcon} text='Connect Wallet' />
+            <Button
+              onClick={() => toggleWalletModal(true)}
+              icon={WalletIcon}
+              text='Connect Wallet'
+            />
           )}
         </div>
       </div>

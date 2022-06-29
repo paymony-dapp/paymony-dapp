@@ -6,7 +6,7 @@ import { dashboardRoutes } from '../../utils/routes';
 const MobileNav = () => {
   const { pathname } = useRouter();
   return (
-    <nav className='fixed inset-x-0 bottom-0 bg-slate-900 py-3 flex justify-center md:hidden border-t border-slate-800'>
+    <nav className='fixed inset-x-0 bottom-0 bg-slate-900 py-3 flex justify-center lg:hidden border-t border-slate-800 z-10'>
       <ul className='flex space-x-2'>
         {dashboardRoutes.map(({ name, route, icon: Icon }, index) => (
           <li key={index}>

@@ -295,13 +295,6 @@ export default function Web() {
                 Convenient Trustless Payments without Constraints or Third Party
               </h2>
 
-              <p className='hidden lg:mt-4 lg:block'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
-                egestas tempus tellus etiam sed. Quam a scelerisque amet
-                ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat
-                quisque ut interdum tincidunt duis.
-              </p>
-
               <Link href='/dashboard'>
                 <a className='inline-block mt-4 px-8 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded sm:w-auto active:text-opacity-75 hover:bg-transparent hover:text-white focus:outline-none focus:ring'>
                   Get started today
