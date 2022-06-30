@@ -1,8 +1,16 @@
-import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '../../components/Layout';
+import { trpcClient } from '../../utils/trpcClient';
 
 const Dashboard = () => {
+  const { data } = trpcClient.useQuery(['health-check']);
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+    }
+  }, [data]);
+
   return (
     <Layout>
       <h1 className='text-zinc-100 text-xl font-bold'>Dashboard</h1>
