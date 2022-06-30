@@ -9,7 +9,7 @@ interface WalletModalProps {
 const WalletModal: FC<WalletModalProps> = ({ show, toggle }) => {
   return (
     <Modal
-      title='Connect a wallet to Continue'
+      title='Connect a wallet to continue'
       isOpen={show}
       setIsOpen={toggle}
     >
