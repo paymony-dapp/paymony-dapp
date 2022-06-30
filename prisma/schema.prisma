@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  address  String  @id @unique
+  username String? @unique @db.VarChar(20)
+  email    String? @unique @db.VarChar(50)
+
+  joinedAt DateTime @default(now())
+
+  plans         Plan[]
+  subscriptions Subscriptions[]
+}
+
+model Subscriptions {
+  id               String       @id @default(cuid())
+  title            String
+  amount           Int
+  signingAddress   String
+  recievingAddress String
+  billingCycle     PlanInterval
+  extrinsicHex     String
+  startDate        DateTime
+  remindMe         Boolean      @default(false)
+  category         String
+  imageUrl         String
+
+
+  subscriberAddress String
+  user              User   @relation(fields: [subscriberAddress], references: [address])
+
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Plan {
+  id           String       @id @default(cuid())
+  amount       Int
+  billingCycle PlanInterval
+  category     String       @db.VarChar(50)
+  description  String       @db.Text
+  isPublic     Boolean      @default(false)
+  accessUrl    String
+
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userWallet String
+  user       User   @relation(fields: [userWallet], references: [address])
+}
+
+enum PlanInterval {
+  HOURLY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
