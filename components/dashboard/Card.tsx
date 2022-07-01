@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import Image from 'next/image';
 
+// Dashboard card
+
 const Card = ({ title, price, squircle, wallet }: any) => {
   return (
     <div className='rounded-2xl bg p-6 mb-4 md:mb-0'>

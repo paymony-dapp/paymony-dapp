@@ -1,8 +1,4 @@
-import {
-  getWallets,
-  SetupNotDoneError,
-  Wallet,
-} from '@talisman-connect/wallets';
+import { getWallets, Wallet } from '@talisman-connect/wallets';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useWalletStore } from '../store/walletStore';
 
