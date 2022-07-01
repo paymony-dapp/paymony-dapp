@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Card from '../../components/Dashboard/Card';
+import Card from '../../components/DashboardCard/Card';
 import Layout from '../../components/Layout';
 import { trpcClient } from '../../utils/trpcClient';
 
