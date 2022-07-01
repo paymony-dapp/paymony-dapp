@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.6.5",
+    "@polkadot/api": "^8.10.1",
     "@prisma/client": "^4.0.0",
     "@talisman-connect/wallets": "^1.1.3",
     "@trpc/client": "^9.25.3",
