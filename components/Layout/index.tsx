@@ -26,8 +26,8 @@ const Layout: FC = ({ children }) => {
               show={showWalletModal}
               toggle={() => setToggleModal(false)}
             />
-            <ConnectWallet />
-            {/* {children} */}
+            {/* <ConnectWallet /> */}
+            {children}
           </main>
         </div>
       </main>
