@@ -1,5 +1,5 @@
 import { Wallet } from '@talisman-connect/wallets';
-import { createStore, StateCreator } from 'zustand';
+import create, { StateCreator } from 'zustand';
 import { persist, PersistOptions } from 'zustand/middleware';
 
 interface WalletAddressStore {
@@ -15,7 +15,7 @@ type MyPersist = (
   options: PersistOptions<WalletAddressStore>
 ) => StateCreator<WalletAddressStore>;
 
-export const useWalletStore = createStore<WalletAddressStore>(
+export const useWalletStore = create<WalletAddressStore>(
   (persist as unknown as MyPersist)(
     (set) => ({
       connected: false,

@@ -13,6 +13,7 @@ import {
   Wallet,
   SetupNotDoneError,
 } from '@talisman-connect/wallets';
+import useWallet from '../../hooks/useWallet';
 
 interface WalletModalProps {
   show: boolean;
@@ -20,43 +21,10 @@ interface WalletModalProps {
 }
 
 const WalletModal: FC<WalletModalProps> = ({ show, toggle }) => {
-  const [wallets, setWallets] = useState<Wallet[]>([]);
-  const [showLink, setShowLink] = useState<boolean>();
-  const [installLink, setInstallLink] = useState<string>('');
-
-  useEffect(() => {
-    const supportedWallets = getWallets();
-    setWallets(supportedWallets);
-  }, [show]);
-
-  const handleConnectWallet = async (wallet: Wallet) => {
-    setShowLink(false);
-    setInstallLink('');
-    if (wallet.installed) {
-      try {
-        await wallet.enable('paymony-dapp');
-        await wallet.subscribeAccounts((accounts) => {
-          console.log(accounts ? accounts[0] : 'No accounts');
-        });
-        toggle(false);
-      } catch (e) {
-        const error = e as any;
-        if (error.instanceof(SetupNotDoneError)) {
-          console.log('Set up not complete');
-        }
-      }
-    } else {
-      setShowLink(true);
-      setInstallLink(wallet.installUrl);
-    }
-  };
-
-  useEffect(() => {
-    if (!show) {
-      setInstallLink('');
-      setShowLink(false);
-    }
-  }, [show]);
+  const { showLink, installLink, handleConnectWallet, wallets } = useWallet({
+    show,
+    toggle,
+  });
 
   return (
     <Modal

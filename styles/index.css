@@ -7,3 +7,7 @@ body {
   font-family: Epilogue, sans-serif;
   scroll-behavior: smooth;
 }
+
+.bg {
+  background: #1d2434;
+}
