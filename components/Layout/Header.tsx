@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '../Button';
 import WalletIcon from '../Icons/WalletIcon';
 import { useWalletModal } from '../../store/walletModalStore';
+import { useWalletStore } from '../../store/walletStore';
+import ProfileModel from '../Modals/ProfileModel';
 
 const Header = () => {
-  const showProfile = false;
+  const connected = useWalletStore((state) => state.connected);
+  const walletAddress = useWalletStore((state) => state.walletAddress);
   const toggleWalletModal = useWalletModal((state) => state.toggleModal);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <header className='bg-gray-900'>
+      <ProfileModel isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className='max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8 flex justify-between items-center lg:block'>
         <div className='lg:hidden ml-2'>
           <Link href='/'>
@@ -20,8 +25,8 @@ const Header = () => {
             </a>
           </Link>
         </div>
-        <div className='flex items-center justify-end gap-4'>
-          {showProfile ? (
+        <div className='flex items-center justify-end gap-2 md:gap-4'>
+          {connected ? (
             <>
               <div className='flex items-center gap-4'>
                 <a
@@ -50,17 +55,22 @@ const Header = () => {
                 className='block w-px h-6 bg-gray-400 rounded-full'
               ></span>
 
-              <a href='' className='block shrink-0'>
+              <div
+                onClick={() => setIsOpen(true)}
+                className='flex items-center shrink-0 appearance-none px-3 py-3 md:px-6 space-x-2 bg-gray-800/40 rounded-lg cursor-pointer'
+              >
                 <Image
                   width={40}
                   height={40}
-                  className='object-cover bg-slate-100 rounded-full'
-                  src={`https://avatars.dicebear.com/api/identicon/${
-                    Math.random() * 100
-                  }.svg`}
+                  className='object-cover bg-zinc-100 rounded-full'
+                  src={`https://avatars.dicebear.com/api/identicon/${walletAddress}.svg`}
                   alt='Simon Lewis'
                 />
-              </a>
+                <p className='text-zinc-50 text-sm md:text-base font-semibold'>
+                  {walletAddress.substring(0, 6)}...
+                  {walletAddress.substring(40)}
+                </p>
+              </div>
             </>
           ) : (
             <Button
