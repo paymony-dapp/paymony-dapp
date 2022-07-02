@@ -1,4 +1,6 @@
 import { createRouter } from '../createRouter';
+import { planRouter } from './plan.routes';
+import { subscriptionRouter } from './sub.routes';
 import { userRouter } from './user.routes';
 
 /**
@@ -11,6 +13,8 @@ export const appRouter = createRouter()
       return 'Running fine';
     },
   })
-  .merge('users.', userRouter);
+  .merge('users.', userRouter)
+  .merge('subscriptions.', subscriptionRouter)
+  .merge('plans.', planRouter);
 
 export type AppRouter = typeof appRouter;
