@@ -1,7 +1,7 @@
 const characters =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-export function generateString(length: number) {
+export function generateString(length: number = 5) {
   let result = ' ';
   const charactersLength = characters.length;
   for (let i = 0; i < length; i++) {

@@ -92,3 +92,32 @@ export enum OakChains {
   STUR = 'STUR',
   TUR = 'TUR',
 }
+
+export enum TimeInterval {
+  HOURLY = 'HOURLY',
+  DAILY = 'DAILY',
+  WEEKLY = 'WEEKLY',
+  MONTHLY = 'MONTHLY',
+}
+
+export enum OakChainSchedulingLimit {
+  STUR = 6 * 30 * 24 * 60 * 60 * 1000,
+  TUR = 6 * 30 * 24 * 60 * 60 * 1000,
+}
+
+export interface NativeTransferPayload {
+  senderAddress: string;
+  receiverAddress: string;
+  recurrences: number;
+  amount: number;
+  signer: any;
+}
+
+export interface NativeTransferAction {
+  senderAddress: string;
+  receiverAddress: string;
+  amount: string;
+  signer: any;
+  providedId: string;
+  timestamps: string[];
+}
