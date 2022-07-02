@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import Card from '../../components/DashboardCard/Card';
 import Layout from '../../components/Layout';
-import { trpcClient } from '../../utils/trpcClient';
+import { trpcHookClient } from '../../utils/trpcClient';
 
 const Dashboard = () => {
-  const { data } = trpcClient.useQuery(['health-check']);
+  const { data } = trpcHookClient.useQuery(['health-check']);
 
   useEffect(() => {
     if (data) {
