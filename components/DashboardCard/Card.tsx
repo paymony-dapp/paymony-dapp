@@ -4,8 +4,8 @@ import Image from 'next/image';
 interface CardProps {
   title: string;
   price: number;
-  squircle: any;
-  wallet: any;
+  squircle?: any;
+  wallet?: any;
 }
 
 const Card = ({ title, price, squircle, wallet }: CardProps) => {
