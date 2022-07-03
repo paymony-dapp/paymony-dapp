@@ -36,7 +36,7 @@ export class RecurringPaymentTask {
   // method to cancel task
 
   // Schedules hourly payment
-  async scheduleHourlyPayments(payload: NativeTransferPayload) {
+  async scheduleHourlyPayments(payload: NativeTransferPayload) : Promise<string>{
     const { amount, receiverAddress, recurrences, senderAddress, signer } =
       payload;
 
@@ -59,7 +59,7 @@ export class RecurringPaymentTask {
     return extrinsicHash;
   }
 
-  async scheduleWeeklyPayments(payload: NativeTransferPayload){
+  async scheduleWeeklyPayments(payload: NativeTransferPayload) : Promise<string>{
     const { amount, receiverAddress, recurrences, senderAddress, signer } =
     payload;
 
@@ -82,7 +82,7 @@ export class RecurringPaymentTask {
     return extrinsicHash;
   }
 
-  async scheduleMonthlyPayments(payload: NativeTransferPayload){
+  async scheduleMonthlyPayments(payload: NativeTransferPayload): Promise<string>{
     const { amount, receiverAddress, recurrences, senderAddress, signer } =
     payload;
 
