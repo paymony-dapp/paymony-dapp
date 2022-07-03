@@ -8,6 +8,7 @@ export const createSubscriptionSchema = z.object({
   amount: z.number().positive('Amount cannot be negative'),
   signingAddress: z.string(),
   receivingAddress: z.string(),
+  txhash: z.string(),
   billingCycle: z.nativeEnum(TimeInterval),
   imageUrl: z.string().url('Invalid image url').default(generateAvatar()),
   category: z.string().default('Subscription'),
@@ -28,3 +29,9 @@ export const getSubscriptionSchema = z.object({
 });
 
 export const getMultipleSubscriptionsSchema = z.array(getSubscriptionSchema);
+
+export type CreateSubscriptionType = z.infer<typeof createSubscriptionSchema>;
+export type GetSubscriptionType = z.infer<typeof getSubscriptionSchema>;
+export type GetMultipleSubscriptionType = z.infer<
+  typeof getMultipleSubscriptionsSchema
+>;
