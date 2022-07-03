@@ -28,7 +28,7 @@ model Subscriptions {
   signingAddress   String
   recievingAddress String
   billingCycle     PlanInterval
-  extrinsicHex     String
+  txHash           String
   startDate        DateTime
   remindMe         Boolean      @default(false)
   category         String

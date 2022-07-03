@@ -13,12 +13,13 @@ const baseUrl = `${PUBLIC_URL}/subscribe/`;
 
 export class PlanService {
   // Create a plan
-  async createPlan() {
+  async createPlan() : Promise<string>{
     // Generate a link
     const link = generateString();
     const planLink = baseUrl + link;
+    return "";
   }
   // Disable/Enable a plan
   // Delete a plan
-  //
+  //Get by id
 }
