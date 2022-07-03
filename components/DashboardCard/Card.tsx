@@ -1,9 +1,14 @@
 import React, { Fragment } from 'react';
 import Image from 'next/image';
 
-// Dashboard card
+interface CardProps {
+  title: string;
+  price: number;
+  squircle: any;
+  wallet: any;
+}
 
-const Card = ({ title, price, squircle, wallet }: any) => {
+const Card = ({ title, price, squircle, wallet }: CardProps) => {
   return (
     <div className='rounded-2xl bg p-6 mb-4 md:mb-0'>
       {wallet ? (

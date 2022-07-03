@@ -16,3 +16,9 @@ export const getPlanSchema = createPlanSchema.extend({
   createdAt: z.date(),
   updatedAt: z.date(),
 });
+
+export const getMultiplePlansSchema = z.array(getPlanSchema);
+
+export type createPlanType = z.TypeOf<typeof createPlanSchema>;
+export type getPlanType = z.TypeOf<typeof getPlanSchema>;
+export type getMultiplePlansType = getPlanType[];
