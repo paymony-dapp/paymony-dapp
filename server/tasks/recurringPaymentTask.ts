@@ -59,9 +59,72 @@ export class RecurringPaymentTask {
     return extrinsicHash;
   }
 
-  // Weekly payments
+  async scheduleWeeklyPayments(payload: NativeTransferPayload){
+    const { amount, receiverAddress, recurrences, senderAddress, signer } =
+    payload;
 
-  // Monthly payments
+    const timestamps: number[] = this.recurrer.getWeeklyRecurringTimestamps(
+      Date.now(),
+      recurrences
+    );
 
-  // Yearly payments
+    const providerId = this.getProvider();
+
+    const extrinsicHash = await this.scheduleNativeTransfer(
+      senderAddress,
+      providerId,
+      timestamps,
+      receiverAddress,
+      amount,
+      signer
+    );
+
+    return extrinsicHash;
+  }
+
+  async scheduleMonthlyPayments(payload: NativeTransferPayload){
+    const { amount, receiverAddress, recurrences, senderAddress, signer } =
+    payload;
+
+    const timestamps: number[] = this.recurrer.getMonthlyRecurringTimestampsByDate(
+      Date.now(),
+      recurrences
+    );
+
+    const providerId = this.getProvider();
+
+    const extrinsicHash = await this.scheduleNativeTransfer(
+      senderAddress,
+      providerId,
+      timestamps,
+      receiverAddress,
+      amount,
+      signer
+    );
+
+    return extrinsicHash;
+  }
+
+  async scheduleDailyPayments(payload: NativeTransferPayload){
+    const { amount, receiverAddress, recurrences, senderAddress, signer } =
+    payload;
+
+    const timestamps: number[] = this.recurrer.getDailyRecurringTimestamps(
+      Date.now(),
+      recurrences
+    );
+
+    const providerId = this.getProvider();
+
+    const extrinsicHash = await this.scheduleNativeTransfer(
+      senderAddress,
+      providerId,
+      timestamps,
+      receiverAddress,
+      amount,
+      signer
+    );
+
+    return extrinsicHash;
+  }  
 }
