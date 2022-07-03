@@ -12,7 +12,7 @@ Paymony is platform that lets people make trustless automated payments
 
 ## Tech
 
-Dillinger uses a number of open source projects to work properly:
+Paymony-dapp uses a number of open source projects to work properly:
 
 - [Nextjs](https://nextjs.org/) - For awesome fullstack app!
 - [Oak JS Time Trigger SDK](https://docs.oak.tech/docs/automation-time-js-sdk/) - Javascript SDK to setup automation task on the OAK blockchain
@@ -43,7 +43,7 @@ yarn dev
 yarn test
 ```
 
-#### Build
+## Build
 
 For production release:
 

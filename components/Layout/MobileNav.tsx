@@ -12,7 +12,7 @@ const MobileNav = () => {
           <li key={index}>
             <Link href={route}>
               <a
-                className={`py-4 px-6 flex flex-col items-center text-white space-x-3 rounded-2xl text-sm ${
+                className={`py-4 px-4 flex flex-col items-center text-white rounded-2xl text-sm ${
                   pathname === route ||
                   pathname.replace('/dashboard', '').includes(route)
                     ? 'bg-slate-800 text-gray-200'

@@ -1,4 +1,4 @@
-import { NativeTransferPayload } from '../../utils/types';
+import { NativeTransferPayload, OakChains } from '../../utils/types';
 import { Recurrer, Scheduler } from 'oak-js-library';
 import { Signer, AddressOrPair } from '@polkadot/api/types';
 import { HexString } from '@polkadot/util/types';
@@ -15,6 +15,7 @@ import uuid from 'uuid';
  */
 export class RecurringPaymentTask {
   private recurrer = new Recurrer();
+  private scheduler = new Scheduler(OakChains.STUR);
 
   private getProvider = () => uuid.v4();
 
