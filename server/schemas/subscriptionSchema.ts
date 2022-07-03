@@ -7,7 +7,7 @@ export const createSubscriptionSchema = z.object({
   title: z.string().max(30, 'Title is too long'),
   amount: z.number().positive('Amount cannot be negative'),
   signingAddress: z.string(),
-  receivingAddress: z.string(),
+  receivingAddress: z.string(), 
   hex: z.string(),
   billingCycle: z.nativeEnum(TimeInterval),
   imageUrl: z.string().url('Invalid image url').default(generateAvatar()),
@@ -25,7 +25,7 @@ export const getSubscriptionSchema = z.object({
   category: z.string(),
   remindMe: z.boolean(),
   active: z.boolean(),
-  extrinsicHex: z.string(),
+  txHash: z.string(),
 });
 
 export const getMultipleSubscriptionsSchema = z.array(getSubscriptionSchema);

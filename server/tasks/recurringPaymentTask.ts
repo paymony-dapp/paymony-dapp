@@ -13,6 +13,8 @@ import uuid from 'uuid';
  * - Weekly
  * - Monthly by Date
  */
+
+
 export class RecurringPaymentTask {
   private recurrer = new Recurrer();
   private scheduler = new Scheduler(OakChains.STUR);
@@ -37,7 +39,7 @@ export class RecurringPaymentTask {
   // method to cancel task
 
   // Schedules hourly payment
-  async scheduleHourlyPayments(payload: NativeTransferPayload) {
+  async scheduleHourlyPayments(payload: NativeTransferPayload) : Promise<string>{
     const { amount, receiverAddress, recurrences, senderAddress, signer } =
       payload;
 
@@ -59,10 +61,5 @@ export class RecurringPaymentTask {
 
     return extrinsicHash;
   }
-
-  // Weekly payments
-
-  // Monthly payments
-
-  // Yearly payments
+  
 }
