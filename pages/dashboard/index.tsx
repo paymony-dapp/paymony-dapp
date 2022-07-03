@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Card from '../../components/DashboardCard/Card';
+import Table from '../../components/DashboardCard/Table';
 import Layout from '../../components/Layout';
 import { trpcHookClient } from '../../utils/trpcClient';
 
@@ -28,6 +29,9 @@ const Dashboard = () => {
           squircle={Squircle}
           wallet={wallet}
         />
+      </section>
+      <section className='my-6'>
+        <Table />
       </section>
     </Layout>
   );
