@@ -17,8 +17,6 @@ model User {
 
   joinedAt DateTime @default(now())
 
-  plans         Plan[]
-  subscriptions Subscriptions[]
 }
 
 model Subscriptions {
@@ -36,15 +34,14 @@ model Subscriptions {
 
 
   subscriberAddress String
-  user              User   @relation(fields: [subscriberAddress], references: [address])
-
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  active            Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model Plan {
   id           String       @id @default(cuid())
+  name         String?
   amount       Int
   billingCycle PlanInterval
   category     String       @db.VarChar(50)
@@ -57,7 +54,6 @@ model Plan {
   updatedAt DateTime @updatedAt
 
   userWallet String
-  user       User   @relation(fields: [userWallet], references: [address])
 }
 
 enum PlanInterval {
