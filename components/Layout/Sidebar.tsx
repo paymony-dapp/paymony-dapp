@@ -1,21 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import BookmarkIcon from '../Icons/BookmarkIcon';
-import MenuIcon from '../Icons/MenuIcon';
-
-const dashboardRoutes = [
-  {
-    name: 'Dashboard',
-    route: '/dashboard',
-    icon: MenuIcon,
-  },
-  {
-    name: 'Subscription',
-    route: '/dashboard/subscription',
-    icon: BookmarkIcon,
-  },
-];
+import { dashboardRoutes } from '../../utils/routes';
 
 const Sidebar = () => {
   const { pathname } = useRouter();

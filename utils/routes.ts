@@ -12,4 +12,9 @@ export const dashboardRoutes = [
     route: '/dashboard/subscription',
     icon: BookmarkIcon,
   },
+  {
+    name: 'Plans',
+    route: '/dashboard/plans',
+    icon: BookmarkIcon,
+  },
 ];

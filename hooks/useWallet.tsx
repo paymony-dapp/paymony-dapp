@@ -1,7 +1,6 @@
 import { getWallets, Wallet } from '@talisman-connect/wallets';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useWalletStore } from '../store/walletStore';
-import { trpcApiClient } from '../utils/trpcClient';
 
 const useWallet = ({
   show,
@@ -15,25 +14,6 @@ const useWallet = ({
   const [installLink, setInstallLink] = useState<string>('');
 
   const connectWallet = useWalletStore((state) => state.connectWallet);
-
-  // Checks if wallet is registered
-  const doesUserExist = async (address: string) => {
-    try {
-      const user = await trpcApiClient.query('users.find', address);
-      return !!user;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const registerUser = async (address: string) => {
-    try {
-      const user = await trpcApiClient.mutation('users.add', { address });
-      return user;
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     const supportedWallets = getWallets();
@@ -49,9 +29,6 @@ const useWallet = ({
         await wallet.subscribeAccounts(async (accounts) => {
           if (accounts) {
             const walletAddress = accounts[0].address;
-            if (!(await doesUserExist(walletAddress))) {
-              await registerUser(walletAddress);
-            }
             connectWallet(walletAddress, wallet);
           }
         });
