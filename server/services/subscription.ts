@@ -1,12 +1,13 @@
 import { prismaClient } from '../../utils/prismaClient'; // db client
 import { NativeTransferPayload, TimeInterval } from '../../utils/types';
+import { CreateSubscriptionType } from '../schemas/subscriptionSchema';
 
 export class SubscriptionService {
   private startRecurringPayments() {}
 
   // Create subscription
   createSubscription = async (
-    transferParameters: NativeTransferPayload,
+    transferParameters: CreateSubscriptionType,
     interval: TimeInterval
   ) => {
     // create subscription based the interval
