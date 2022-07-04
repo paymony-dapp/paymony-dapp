@@ -1,7 +1,13 @@
 import { prismaClient } from '../../utils/prismaClient'; // db client
-import { NativeTransferPayload, PlanInterval } from '../../utils/types';
+import {
+  NativeTransferPayload,
+  PlanInterval,
+  OakChains,
+} from '../../utils/types';
 import { CreateSubscriptionType } from '../schemas/subscriptionSchema';
 import { RecurringPaymentTask } from '../tasks/recurringPaymentTask';
+import { Scheduler, Constants } from 'oak-js-library';
+import { Signer } from '@polkadot/api/types';
 
 export class SubscriptionService {
   private startRecurringPayments() {}
@@ -13,30 +19,97 @@ export class SubscriptionService {
     transferParameters: CreateSubscriptionType,
     interval: PlanInterval
   ) => {
-    // const sub = await prismaClient.subscriptions.create({
-    //   data:
-    //   {
-    //     amount: transferParameters.amount,
-    //   },
-    // });
-    // Subscription in database
+    const {
+      amount,
+      category,
+      signingAddress,
+      receivingAddress,
+      subscriberAddress,
+      title,
+      hex,
+      imageUrl,
+    } = transferParameters;
+
+    //const customErrorHandler = (result) => {...} @Todo
+    const backendScheduler = new Scheduler(Constants.OakChains.NEU);
+    const txHash = await backendScheduler.sendExtrinsic(hex);
+
+    const sub = await prismaClient.subscriptions.create({
+      data: {
+        amount,
+        billingCycle: interval,
+        category,
+        signingAddress,
+        subscriberAddress,
+        recievingAddress: receivingAddress,
+        title,
+        txHash,
+        imageUrl,
+        startDate: new Date(),
+        active: true,
+      },
+    });
   };
+
   //getSubscription
-  //Create p
-  getSubscriptionStatus = async (subId: string) => {};
+  async getSubcription(subId: string) {
+    return await prismaClient.subscriptions.findFirstOrThrow({
+      where: {
+        id: subId,
+      },
+    });
+  }
 
-  //getSubcriptionTransactions(subId: string) //from txHash
+  //Create Subcription status
+  async getSubscriptionStatus(subId: string): Promise<boolean> {
+    const subcription = await prismaClient.subscriptions.findFirstOrThrow({
+      where: {
+        id: subId,
+      },
+    });
+    return subcription.active;
+  }
 
-  cancelSubscription = async (subId: string, hex: string) => {
-    //will change a subcription from db
-    // will change on block change
-    //
+  async deleteSubscription(subId: string) {
+    const subcription = await this.getSubcription(subId);
+
+    if (subcription.active) {
+      throw new Error('You must deactivate the error before deleting it');
+    }
+
+    await prismaClient.subscriptions.delete({
+      where: {
+        id: subId,
+      },
+    });
+  }
+
+  cancelSubscription = async (subId: string, signer: Signer) => {
+    const subcription = await this.getSubcription(subId);
+    const scheduler = new Scheduler(Constants.OakChains.NEU);
+    const txHash = await scheduler.getTaskID(
+      subcription.signingAddress,
+      subcription?.txHash
+    );
+
+    // @Aliemeka//Please check this method that builds the cancel extrinsic, I am not sure of the parametrs it is expecting
+    const hex = await scheduler.buildCancelTaskExtrinsic(
+      subcription.signingAddress, //This has to be the wallet account used in creating the subcription, I am not sure if the signingAddress will do
+      txHash, //this is correct
+      signer //This is the current signer,
+    );
+    const cancelTxHash = await scheduler.sendExtrinsic(hex);
+
+    await prismaClient.subscriptions.update({
+      where: {
+        id: subId,
+      },
+      data: {
+        active: false,
+        txHash: cancelTxHash,
+      },
+    });
   };
-
-  //Delete Subcription
 }
 
-const subscriptionService = new SubscriptionService();
-
-//A plan is if i want to be paid
-//A subcription is if i want to pay
+export const subscriptionService = new SubscriptionService();
