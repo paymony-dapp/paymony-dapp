@@ -27,11 +27,20 @@ const Subscription: FC<SubscriptionProps> = (props) => {
 
       <div className='grid sm:grid-col-2 md:grid-cols-4 lg:grid-col-4 gap-x-4 text-sm'>
         {subscriptions.slice(0, 8).map((subscription) => (
-          <PlanCard
-            image={subscription.img}
-            name={subscription.name}
-            num={subscription.num}
-          />
+          <a
+            href='#'
+            className='appearance-none'
+            onClick={(e) => {
+              e.preventDefault();
+              setShow(true);
+            }}
+          >
+            <PlanCard
+              image={subscription.img}
+              name={subscription.name}
+              num={subscription.num}
+            />
+          </a>
         ))}
       </div>
       <Subscribe show={show} setShow={setShow} />

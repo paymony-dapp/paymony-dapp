@@ -1,5 +1,5 @@
-import { generateAvatar } from '../utils/generateAvatar';
-import { generateString } from '../utils/generateString';
+import { generateAvatar } from '../../utils/generateAvatar';
+import { generateString } from '../../utils/generateString';
 
 test('Should return a random string with desired length', () => {
   let length = 10;
