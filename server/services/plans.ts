@@ -6,6 +6,7 @@
  *
  */
 
+import { Plan } from '@prisma/client';
 import { PUBLIC_URL } from '../../utils/config';
 import { generateString } from '../../utils/generateString';
 import { prismaClient } from '../../utils/prismaClient';
@@ -35,11 +36,50 @@ export class PlanService {
         name
       }
     })
-   
+
     return planLink
   }
-  // Disable/Enable a plan
-  // Delete a plan
-  //Get by id
-  //get plans
+
+  async togglePlanActivation(planId: string): Promise<boolean> {
+    const plan = await prismaClient.plan.findFirst({
+      where: {
+        id: planId
+      }
+    })
+
+    if (plan == null || !plan || plan == undefined) {
+      return false
+    }
+
+    await prismaClient.plan.update({
+      where: {
+        id: planId
+      },
+      data: {
+        isPublic: !plan?.isPublic
+      }
+    })
+
+    return true;
+  }
+
+  async deletePlan(planId: string){
+    const plan = await prismaClient.plan.delete({
+      where: {
+        id: planId
+      }
+    })
+  }
+
+  async getPlanById(planId: string): Promise<Plan | null>{
+    return await prismaClient.plan.findFirst({
+      where: {
+        id: planId
+      }
+    })
+  } 
+
+  async getAllPlans(): Promise<Plan[]>{
+    return await prismaClient.plan.findMany();
+  }  
 }

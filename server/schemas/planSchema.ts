@@ -8,7 +8,7 @@ export const createPlanSchema = z.object({
   description: z.string(),
   isPublic: z.boolean().default(false),
   userWallet: z.string(),
-  name: z.string()
+  name: z.string(),
 });
 
 export const getPlanSchema = createPlanSchema.extend({
