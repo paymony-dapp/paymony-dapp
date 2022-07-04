@@ -8,6 +8,7 @@ import { Recurrer, Scheduler } from 'oak-js-library';
 import { Signer, AddressOrPair } from '@polkadot/api/types';
 import { HexString } from '@polkadot/util/types';
 import uuid from 'uuid';
+import { TURUNIT } from '../utils/config';
 
 /**
  * This feature schedules payment task and builds the schedule
@@ -72,8 +73,7 @@ export class RecurringTransferBuilder {
         receivingAddress,
         timestamps
       );
-
-      const providedId = uuid.v4();
+      const providedId = uuid.v4;
       const hex = (await this.scheduler.buildScheduleNativeTransferExtrinsic(
         address,
         providedId,
@@ -100,17 +100,20 @@ export class RecurringTransferBuilder {
     try {
       const { amount, receiverAddress, recurrences, senderAddress, signer } =
         payload;
+      console.log('Hourly hex');
 
       const timestamps: number[] = this.recurrer.getHourlyRecurringTimestamps(
         Date.now(),
         recurrences
       );
 
+      const turAmount = amount * TURUNIT;
+
       const extrinsicHex = await this.buildNativeTransferHex(
         senderAddress,
         timestamps,
         receiverAddress,
-        amount,
+        turAmount,
         signer
       );
 
@@ -154,6 +157,7 @@ export class RecurringTransferBuilder {
 
       return extrinsicHex;
     } catch (error) {
+      console.log('Error');
       throw error;
     }
   }
@@ -192,3 +196,5 @@ export class RecurringTransferBuilder {
     return extrinsicHex;
   }
 }
+
+export const recurringTransferBuilder = new RecurringTransferBuilder();

@@ -72,11 +72,12 @@ const PlanPage: NextPage = () => {
       ) : plan ? (
         <PlanDetialsCard
           active={plan.active}
-          billingCycle={plan.billingCycle.toString().toLowerCase()}
+          billingCycle={plan.billingCycle as any}
           amount={plan.amount}
           category={plan.category}
           description={plan.description}
           name={plan.name!}
+          address={plan.userWallet}
         />
       ) : error ? (
         <ErrorState errorMessage={errorMessage} />
