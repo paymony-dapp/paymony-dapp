@@ -49,9 +49,7 @@ const PlanPage: NextPage = () => {
       } catch (error) {
         setError(true);
         if (error instanceof TRPCClientError) {
-          if (error.data.code === 'NOT_FOUND') {
-            setErrorMessage('Sorry, this plan cannot be found');
-          }
+          setErrorMessage('Sorry, this plan cannot be found');
         } else {
           setErrorMessage('Error occured fetching plan');
         }

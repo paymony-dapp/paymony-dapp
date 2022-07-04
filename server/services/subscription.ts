@@ -1,21 +1,18 @@
 import { prismaClient } from '../../utils/prismaClient'; // db client
-import {
-  NativeTransferPayload,
-  PlanInterval,
-  OakChains,
-} from '../../utils/types';
+import { OakChains } from '../../utils/types';
 import { CreateSubscriptionType } from '../schemas/subscriptionSchema';
-import { Scheduler, Constants } from 'oak-js-library';
 import { Signer } from '@polkadot/api/types';
 import { generateAvatar } from '../../utils/generateAvatar';
 
 export class SubscriptionService {
   private startRecurringPayments() {}
-  private scheduler = new Scheduler(OakChains.STUR);
 
   // Create subscription
 
   createSubscription = async (transferParameters: CreateSubscriptionType) => {
+    const { Scheduler } = await import('oak-js-library');
+
+    const scheduler = new Scheduler(OakChains.STUR);
     const {
       amount,
       category,
@@ -29,7 +26,7 @@ export class SubscriptionService {
     } = transferParameters;
 
     //const customErrorHandler = (result) => {...} @Todo
-    const txHash = await this.scheduler.sendExtrinsic(hex);
+    const txHash = await scheduler.sendExtrinsic(hex);
 
     prismaClient.subscriptions.create({
       data: {
@@ -88,19 +85,23 @@ export class SubscriptionService {
   }
 
   cancelSubscription = async (subId: string, signer: Signer) => {
+    const { Scheduler } = await import('oak-js-library');
+
+    const scheduler = new Scheduler(OakChains.STUR);
+
     const subcription = await this.getSubcription(subId);
-    const txHash = await this.scheduler.getTaskID(
+    const txHash = await scheduler.getTaskID(
       subcription.signingAddress,
       subcription?.txHash
     );
 
     // @Aliemeka//Please check this method that builds the cancel extrinsic, I am not sure of the parametrs it is expecting
-    const hex = await this.scheduler.buildCancelTaskExtrinsic(
+    const hex = await scheduler.buildCancelTaskExtrinsic(
       subcription.signingAddress, //This has to be the wallet account used in creating the subcription, I am not sure if the signingAddress will do
       txHash, //this is correct
       signer //This is the current signer,
     );
-    const cancelTxHash = await this.scheduler.sendExtrinsic(hex);
+    const cancelTxHash = await scheduler.sendExtrinsic(hex);
 
     await prismaClient.subscriptions.update({
       where: {

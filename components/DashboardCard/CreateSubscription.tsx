@@ -1,11 +1,8 @@
-import React, { Dispatch, FC, SetStateAction, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 import Modal from '../Modals/index';
 import CalendarIcon from '../Icons/CalendarIcon';
 import DollarIcon from '../Icons/DollarIcon';
 import { useFormik } from 'formik';
-import { useWalletStore } from '../../store/walletStore';
-import { z } from 'zod';
-import { PlanInterval } from '@prisma/client';
 import useSubscribe from '../../hooks/useSubscribe';
 
 interface CreateSubscriptionProps {
@@ -14,7 +11,6 @@ interface CreateSubscriptionProps {
 }
 
 const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
-  const walletAddress = useWalletStore((state) => state.walletAddress);
   const { handleSubscribe } = useSubscribe();
 
   const formik = useFormik({
