@@ -122,3 +122,18 @@ export interface NativeTransferAction {
   providedId: string;
   timestamps: string[];
 }
+
+export interface Plan {
+  id: string;
+  name: string | null;
+  amount: number;
+  billingCycle: PlanInterval;
+  category: string;
+  description: string;
+  isPublic: boolean;
+  accessUrl: string;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  userWallet: string;
+}
