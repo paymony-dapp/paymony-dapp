@@ -1,4 +1,4 @@
-import { RecurringTransferBuilder } from '../../builders/recurringTransferBuilder';
+import { RecurringTransferBuilder } from '../../lib/recurringTransferBuilder';
 
 // test('should generate an extrinsic hex for', async() => {
 //     const recurringTransferBuilder = new RecurringTransferBuilder();
