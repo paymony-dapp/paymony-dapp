@@ -7,7 +7,7 @@ import {
 import { Recurrer, Scheduler } from 'oak-js-library';
 import { Signer, AddressOrPair } from '@polkadot/api/types';
 import { HexString } from '@polkadot/util/types';
-import uuid from 'uuid';
+import { v4 } from 'uuid';
 import { TURUNIT } from '../utils/config';
 
 /**
@@ -73,7 +73,7 @@ export class RecurringTransferBuilder {
         receivingAddress,
         timestamps
       );
-      const providedId = uuid.v4;
+      const providedId = v4();
       const hex = (await this.scheduler.buildScheduleNativeTransferExtrinsic(
         address,
         providedId,
@@ -107,13 +107,39 @@ export class RecurringTransferBuilder {
         recurrences
       );
 
-      const turAmount = amount * TURUNIT;
+      const extrinsicHex = await this.buildNativeTransferHex(
+        senderAddress,
+        timestamps,
+        receiverAddress,
+        amount,
+        signer
+      );
+
+      return extrinsicHex;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async buildDailyExtrinsic(
+    payload: NativeTransferPayload
+  ): Promise<HexString> {
+    try {
+      const { amount, receiverAddress, recurrences, senderAddress, signer } =
+        payload;
+      const hourOfDay = 12;
+
+      const timestamps: number[] = this.recurrer.getDailyRecurringTimestamps(
+        Date.now(),
+        recurrences,
+        hourOfDay
+      );
 
       const extrinsicHex = await this.buildNativeTransferHex(
         senderAddress,
         timestamps,
         receiverAddress,
-        turAmount,
+        amount,
         signer
       );
 

@@ -2,7 +2,13 @@ import { Wallet } from '@talisman-connect/wallets';
 import React from 'react';
 // import { RecurringTransferBuilder } from '../lib/recurringTransferBuilder';
 import { useWalletStore } from '../store/walletStore';
-import { PlanInterval } from '../utils/types';
+import { TURUNIT } from '../utils/config';
+import {
+  DateOfMonth,
+  DayOfWeek,
+  NativeTransferPayload,
+  PlanInterval,
+} from '../utils/types';
 
 enum SubscriptionProcessStatus {
   IDLE = 'IDLE',
@@ -19,6 +25,43 @@ const useSubscribe = () => {
   const signTransaction = () => {
     if (wallet?.sign) {
       return wallet.sign(walletAddress, `Subscribe to this plan`);
+    }
+  };
+
+  const generateExtrinsicHexAndSend = async (
+    tranferParameters: NativeTransferPayload,
+    billingCycle: PlanInterval,
+    period?: number
+  ) => {
+    try {
+      const { recurringTransferBuilder } = await import(
+        '../lib/recurringTransferBuilder'
+      );
+
+      const timeSlot = period ? period : 0;
+
+      switch (billingCycle) {
+        case PlanInterval.HOURLY:
+          return await recurringTransferBuilder.buildHourlyExtrinsic(
+            tranferParameters
+          );
+        case PlanInterval.YEARLY:
+          return await recurringTransferBuilder.buildDailyExtrinsic(
+            tranferParameters
+          );
+        case PlanInterval.WEEKLY:
+          return await recurringTransferBuilder.buildWeeklyExtrinsic(
+            tranferParameters,
+            timeSlot as DayOfWeek
+          );
+        case PlanInterval.MONTHLY:
+          return await recurringTransferBuilder.buildMonthlyExtrinsic(
+            tranferParameters,
+            timeSlot as DateOfMonth
+          );
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -40,28 +83,30 @@ const useSubscribe = () => {
     recurrences: number,
     receiverAddress: string,
     title: string,
-    category: string
+    category: string,
+    period?: number
   ) => {
-    // const recurringTransferBuilder = new RecurringTransferBuilder();
     if (typeof window !== undefined) {
       const { web3FromAddress, web3Enable } = await import(
         '@polkadot/extension-dapp'
       );
       await web3Enable('paymony-dapp');
       const injector = await web3FromAddress(walletAddress);
+
       try {
-        const { recurringTransferBuilder } = await import(
-          '../lib/recurringTransferBuilder'
+        const turAmount = amount * TURUNIT;
+
+        await generateExtrinsicHexAndSend(
+          {
+            amount: turAmount,
+            receiverAddress,
+            recurrences,
+            senderAddress: walletAddress,
+            signer: injector.signer,
+          },
+          billingInterval,
+          period
         );
-        console.log(recurringTransferBuilder);
-        const hex = await recurringTransferBuilder.buildHourlyExtrinsic({
-          amount,
-          receiverAddress,
-          recurrences,
-          senderAddress: walletAddress,
-          signer: injector.signer,
-        });
-        console.log(hex);
       } catch (error) {
         console.log(error);
       }
