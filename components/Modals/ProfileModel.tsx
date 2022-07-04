@@ -30,7 +30,7 @@ const ProfileModel: FC<ProfileModelProps> = (props) => {
   };
 
   return (
-    <Modal title='Your wallet' {...props}>
+    <Modal title='Your wallet' {...props} size='small'>
       <div className='bg-gray-700/40 text-zinc-50 font-semibold tracking-tighter py-3 text-center rounded-md text-lg mt-6'>
         <p>
           <span>
