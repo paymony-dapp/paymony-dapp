@@ -1,7 +1,5 @@
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import Modal from '../Modals/index';
-import { subscriptions } from '../../data';
-import Card from '../card';
 import CalendarIcon from '../Icons/CalendarIcon';
 import DollarIcon from '../Icons/DollarIcon';
 

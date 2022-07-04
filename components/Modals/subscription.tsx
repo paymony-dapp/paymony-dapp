@@ -1,8 +1,8 @@
 import React, { Dispatch, FC, SetStateAction, useState } from 'react';
 import Modal from '.';
 import { subscriptions } from '../../utils/data';
-import Card from '../card';
 import SearchIcon from '../Icons/SearchIcon';
+import PlanCard from '../card/PlanCard';
 import Subscribe from '../subscribe/Subscribe';
 
 interface SubscriptionProps {
@@ -27,12 +27,11 @@ const Subscription: FC<SubscriptionProps> = (props) => {
 
       <div className='grid sm:grid-col-2 md:grid-cols-4 lg:grid-col-4 gap-x-4 text-sm'>
         {subscriptions.slice(0, 8).map((subscription) => (
-          <Card onClick={() => setShow(!show)}>
-            <img src={subscription.img} alt='' />
-            <h4 className='text-gray-200 py-3 text-lg font-semibold'>
-              {subscription.name}
-            </h4>
-          </Card>
+          <PlanCard
+            image={subscription.img}
+            name={subscription.name}
+            num={subscription.num}
+          />
         ))}
       </div>
       <Subscribe show={show} setShow={setShow} />
