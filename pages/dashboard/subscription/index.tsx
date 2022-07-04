@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../../../components/Layout';
 import Card from '../../../components/card/card';
 import { subscriptions } from '../../../data';
+import SubscriptionModal from '../../../components/Modals/subscription';
+import CreateSubscription from '../../../components/DashboardCard/CreateSubscription';
 
 const Subscription = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
   return (
     <Layout>
+      <SubscriptionModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <CreateSubscription show={show} setShow={setShow} />
       <section className=''>
         <div className='w-full flex cursor-pointer'>
           <h4 className='text-white mr-5 border border-b-blue-500 pb-3 border-t-0  border-l-0 border-r-0'>
@@ -16,10 +22,16 @@ const Subscription = () => {
         <div className='text-white my-5 flex w-full justify-between items-center'>
           <h2 className='font-bold text-3xl'>My Subscriptions</h2>
           <div className=''>
-            <button className='border border-gray-100 py-3 px-5 rounded-lg mr-4 cursor-pointer'>
+            <button
+              className='border border-gray-100 py-3 px-5 rounded-lg mr-4 cursor-pointer'
+              onClick={() => setShow(!show)}
+            >
               + Create Custom
             </button>
-            <button className='bg-blue-500 text-white hover:bg-700 py-3 px-5 rounded-lg mr-4 cursor-pointer'>
+            <button
+              className='bg-blue-500 text-white hover:bg-700 py-3 px-5 rounded-lg mr-4 cursor-pointer'
+              onClick={() => setIsOpen(true)}
+            >
               + Add Subscription
             </button>
           </div>
