@@ -5,6 +5,7 @@ import { API_URL } from '../utils/config';
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import App from 'next/app';
 import { AppRouter } from '../server/routes/app.route';
+import superjson from 'superjson';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
@@ -37,6 +38,7 @@ export default withTRPC<AppRouter>({
         }
         return {};
       },
+      transformer: superjson,
       links,
     };
   },
