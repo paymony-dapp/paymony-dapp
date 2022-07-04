@@ -1,7 +1,7 @@
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import Modal from '../Modals/index';
-import { subscriptions } from '../../data';
-import Card from '../card/card';
+import CalendarIcon from '../Icons/CalendarIcon';
+import DollarIcon from '../Icons/DollarIcon';
 
 interface CreateSubscriptionProps {
   show: boolean;
@@ -58,7 +58,7 @@ const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
                 placeholder='e.g $100'
               />
               <span className='absolute inset-y-0 inline-flex items-center left-3'>
-                <img src='/Vector.svg' alt='' />
+                <DollarIcon />
               </span>
             </div>
           </div>
@@ -73,7 +73,7 @@ const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
                 placeholder='Select Date'
               />
               <span className='absolute inset-y-0 inline-flex items-center left-3'>
-                <img src='/calendar.svg' alt='' />
+                <CalendarIcon />
               </span>
             </div>
           </div>
@@ -90,7 +90,7 @@ const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
                 placeholder='Enter wallet address (Oak network)'
               />
               <span className='absolute inset-y-0 inline-flex items-center left-3'>
-                <img src='/Vector.svg' alt='' />
+                <DollarIcon />
               </span>
             </div>
           </div>
@@ -105,7 +105,7 @@ const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
                 placeholder='Select Date'
               />
               <span className='absolute inset-y-0 inline-flex items-center left-3'>
-                <img src='/calendar.svg' alt='' />
+                <CalendarIcon />
               </span>
             </div>
           </div>

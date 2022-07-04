@@ -4,7 +4,7 @@ import { CreateSubscriptionType } from '../schemas/subscriptionSchema';
 import { RecurringPaymentTask } from '../tasks/recurringPaymentTask';
 
 export class SubscriptionService {
-  private startRecurringPayments() { }
+  private startRecurringPayments() {}
   private recurrer = new RecurringPaymentTask();
 
   // Create subscription
@@ -13,21 +13,17 @@ export class SubscriptionService {
     transferParameters: CreateSubscriptionType,
     interval: TimeInterval
   ) => {
-
-   
     // const sub = await prismaClient.subscriptions.create({
     //   data:
     //   {
     //     amount: transferParameters.amount,
-        
     //   },
     // });
-
     // Subscription in database
   };
   //getSubscription
   //Create p
-  getSubscriptionStatus = async (subId: string) => { };
+  getSubscriptionStatus = async (subId: string) => {};
 
   //getSubcriptionTransactions(subId: string) //from txHash
 
@@ -41,7 +37,6 @@ export class SubscriptionService {
 }
 
 const subscriptionService = new SubscriptionService();
-
 
 //A plan is if i want to be paid
 //A subcription is if i want to pay

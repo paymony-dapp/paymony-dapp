@@ -31,6 +31,7 @@ const WalletModal: FC<WalletModalProps> = ({ show, toggle }) => {
       title='Connect a wallet to continue'
       isOpen={show}
       setIsOpen={toggle}
+      size='small'
     >
       {showLink ? (
         <p className='text-center text-xs text-zinc-300 mb-2 p-2 rounded-full'>

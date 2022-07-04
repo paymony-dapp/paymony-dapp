@@ -1,7 +1,9 @@
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import Modal from '../Modals/index';
 import { subscriptions } from '../../data';
-import Card from '../card/card';
+import Card from '../card';
+import CalendarIcon from '../Icons/CalendarIcon';
+import DollarIcon from '../Icons/DollarIcon';
 
 interface SubscribeProps {
   show: boolean;
@@ -69,7 +71,7 @@ const Subscribe: FC<SubscribeProps> = (props) => {
                 disabled
               />
               <span className='absolute inset-y-0 inline-flex items-center left-3'>
-                <img src='/Vector.svg' alt='' />
+                <DollarIcon />
               </span>
             </div>
           </div>
@@ -84,7 +86,7 @@ const Subscribe: FC<SubscribeProps> = (props) => {
                 placeholder='Select Date'
               />
               <span className='absolute inset-y-0 inline-flex items-center left-3'>
-                <img src='/calendar.svg' alt='' />
+                <CalendarIcon />
               </span>
             </div>
           </div>
@@ -102,7 +104,7 @@ const Subscribe: FC<SubscribeProps> = (props) => {
                 disabled
               />
               <span className='absolute inset-y-0 inline-flex items-center left-3'>
-                <img src='/Vector.svg' alt='' />
+                <DollarIcon />
               </span>
             </div>
           </div>
@@ -118,7 +120,7 @@ const Subscribe: FC<SubscribeProps> = (props) => {
                 disabled
               />
               <span className='absolute inset-y-0 inline-flex items-center left-3'>
-                <img src='/calendar.svg' alt='' />
+                <CalendarIcon />
               </span>
             </div>
           </div>
