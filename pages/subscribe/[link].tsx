@@ -1,4 +1,3 @@
-import { Plan } from '@prisma/client';
 import { TRPCClientError } from '@trpc/client';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -7,6 +6,23 @@ import ErrorState from '../../components/EmptyState/ErrorState';
 import PlanDetialsCard from '../../components/PlanDetailsCard';
 import Skeleton from '../../components/Skeleton';
 import { trpcApiClient } from '../../utils/trpcClient';
+
+type PlanInterval = 'HOURLY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
+
+type Plan = {
+  id: string;
+  name: string | null;
+  amount: number;
+  billingCycle: PlanInterval;
+  category: string;
+  description: string;
+  isPublic: boolean;
+  accessUrl: string;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  userWallet: string;
+};
 
 const PlanPage: NextPage = () => {
   const { asPath } = useRouter();
