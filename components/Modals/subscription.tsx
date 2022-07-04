@@ -1,7 +1,8 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import React, { Dispatch, FC, SetStateAction, useState } from 'react';
 import Modal from '.';
 import { subscriptions } from '../../data';
 import Card from '../card/card';
+import Subscribe from '../subscribe/Subscribe';
 
 interface SubscriptionProps {
   isOpen: boolean;
@@ -9,6 +10,7 @@ interface SubscriptionProps {
 }
 
 const Subscription: FC<SubscriptionProps> = (props) => {
+  const [show, setShow] = useState<boolean>(false);
   return (
     <Modal title='Select Service' {...props}>
       <div className='mx-auto w-4/5'>
@@ -24,7 +26,7 @@ const Subscription: FC<SubscriptionProps> = (props) => {
 
       <div className='grid sm:grid-col-2 md:grid-cols-4 lg:grid-col-4 gap-x-4 text-sm'>
         {subscriptions.slice(0, 8).map((subscription) => (
-          <Card>
+          <Card onClick={() => setShow(!show)}>
             <img src={subscription.img} alt='' />
             <h4 className='text-gray-200 py-3 text-lg font-semibold'>
               {subscription.name}
@@ -32,6 +34,7 @@ const Subscription: FC<SubscriptionProps> = (props) => {
           </Card>
         ))}
       </div>
+      <Subscribe show={show} setShow={setShow} />
     </Modal>
   );
 };
