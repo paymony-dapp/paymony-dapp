@@ -1,11 +1,16 @@
 import { prismaClient } from '../../utils/prismaClient'; // db client
-import { NativeTransferPayload, PlanInterval, OakChains } from '../../utils/types';
+import {
+  NativeTransferPayload,
+  PlanInterval,
+  OakChains,
+} from '../../utils/types';
 import { CreateSubscriptionType } from '../schemas/subscriptionSchema';
 import { RecurringPaymentTask } from '../tasks/recurringPaymentTask';
 import { Scheduler, Constants } from 'oak-js-library';
+import { Signer } from '@polkadot/api/types';
 
 export class SubscriptionService {
-  private startRecurringPayments() { }
+  private startRecurringPayments() {}
   private recurrer = new RecurringPaymentTask();
 
   // Create subscription
@@ -14,15 +19,23 @@ export class SubscriptionService {
     transferParameters: CreateSubscriptionType,
     interval: PlanInterval
   ) => {
-    const { amount, category, signingAddress, receivingAddress, subscriberAddress, title, hex, imageUrl } = transferParameters;
+    const {
+      amount,
+      category,
+      signingAddress,
+      receivingAddress,
+      subscriberAddress,
+      title,
+      hex,
+      imageUrl,
+    } = transferParameters;
 
     //const customErrorHandler = (result) => {...} @Todo
-    const backendScheduler = new Scheduler(Constants.OakChains.NEU)
-    const txHash = await backendScheduler.sendExtrinsic(hex)
+    const backendScheduler = new Scheduler(Constants.OakChains.NEU);
+    const txHash = await backendScheduler.sendExtrinsic(hex);
 
     const sub = await prismaClient.subscriptions.create({
-      data:
-      {
+      data: {
         amount,
         billingCycle: interval,
         category,
@@ -33,7 +46,7 @@ export class SubscriptionService {
         txHash,
         imageUrl,
         startDate: new Date(),
-        active: true
+        active: true,
       },
     });
   };
@@ -43,8 +56,8 @@ export class SubscriptionService {
     return await prismaClient.subscriptions.findFirstOrThrow({
       where: {
         id: subId,
-      }
-    })
+      },
+    });
   }
 
   //Create Subcription status
@@ -52,51 +65,51 @@ export class SubscriptionService {
     const subcription = await prismaClient.subscriptions.findFirstOrThrow({
       where: {
         id: subId,
-      }
-    })
+      },
+    });
     return subcription.active;
-  };
+  }
 
   async deleteSubscription(subId: string) {
     const subcription = await this.getSubcription(subId);
 
     if (subcription.active) {
-      throw new Error("You must deactivate the error before deleting it")
+      throw new Error('You must deactivate the error before deleting it');
     }
 
     await prismaClient.subscriptions.delete({
       where: {
         id: subId,
-      }
-    })
-  };
+      },
+    });
+  }
 
-  cancelSubscription = async (subId: string, hex: string) => {
-
+  cancelSubscription = async (subId: string, signer: Signer) => {
     const subcription = await this.getSubcription(subId);
-    const scheduler = new Scheduler(Constants.OakChains.NEU)
-    const txHash = await scheduler.getTaskID(subcription.signingAddress, subcription?.txHash)
+    const scheduler = new Scheduler(Constants.OakChains.NEU);
+    const txHash = await scheduler.getTaskID(
+      subcription.signingAddress,
+      subcription?.txHash
+    );
 
-   // @Aliemeka//Please check this method that builds the cancel extrinsic, I am not sure of the parametrs it is expecting 
-    const extrinsicHex = await scheduler.buildCancelTaskExtrinsic(
+    // @Aliemeka//Please check this method that builds the cancel extrinsic, I am not sure of the parametrs it is expecting
+    const hex = await scheduler.buildCancelTaskExtrinsic(
       subcription.signingAddress, //This has to be the wallet account used in creating the subcription, I am not sure if the signingAddress will do
-      txHash,//this is correct
-      injector.signer //This is the current signer, 
-    )
-    const cancelTxHash = await scheduler.sendExtrinsic(hex)
+      txHash, //this is correct
+      signer //This is the current signer,
+    );
+    const cancelTxHash = await scheduler.sendExtrinsic(hex);
 
     await prismaClient.subscriptions.update({
       where: {
-        id: subId
+        id: subId,
       },
       data: {
         active: false,
-        txHash: cancelTxHash
-      }
-    })
+        txHash: cancelTxHash,
+      },
+    });
   };
 }
 
-const subscriptionService = new SubscriptionService();
-
-
+export const subscriptionService = new SubscriptionService();
