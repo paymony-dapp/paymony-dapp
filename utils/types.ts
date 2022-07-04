@@ -93,7 +93,7 @@ export enum OakChains {
   TUR = 'TUR',
 }
 
-export enum TimeInterval {
+export enum PlanInterval {
   HOURLY = 'HOURLY',
   DAILY = 'DAILY',
   WEEKLY = 'WEEKLY',
@@ -120,4 +120,19 @@ export interface NativeTransferAction {
   signer: any;
   providedId: string;
   timestamps: string[];
+}
+
+export interface Plan {
+  id: string;
+  name: string | null;
+  amount: number;
+  billingCycle: PlanInterval;
+  category: string;
+  description: string;
+  isPublic: boolean;
+  accessUrl: string;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  userWallet: string;
 }

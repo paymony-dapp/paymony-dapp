@@ -1,13 +1,14 @@
 import { z } from 'zod';
-import { TimeInterval } from '../../utils/types';
+import { PlanInterval } from '../../utils/types';
 
 export const createPlanSchema = z.object({
   amount: z.number().positive().min(0.1),
-  billingCycle: z.nativeEnum(TimeInterval),
+  billingCycle: z.nativeEnum(PlanInterval),
   category: z.string().max(50, 'Category name is too long'),
   description: z.string(),
   isPublic: z.boolean().default(false),
   userWallet: z.string(),
+  name: z.string(),
 });
 
 export const getPlanSchema = createPlanSchema.extend({

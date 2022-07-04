@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { generateAvatar } from '../../utils/generateAvatar';
-import { TimeInterval } from '../../utils/types';
+import { PlanInterval } from '../../utils/types';
 
 // Validates payload for creating a subscription
 export const createSubscriptionSchema = z.object({
@@ -9,7 +9,7 @@ export const createSubscriptionSchema = z.object({
   signingAddress: z.string(),
   receivingAddress: z.string(), 
   hex: z.string(),
-  billingCycle: z.nativeEnum(TimeInterval),
+  billingCycle: z.nativeEnum(PlanInterval),
   imageUrl: z.string().url('Invalid image url').default(generateAvatar()),
   category: z.string().default('Subscription'),
   remindMe: z.boolean().default(false),
@@ -20,7 +20,7 @@ export const getSubscriptionSchema = z.object({
   id: z.string(),
   signingAddress: z.string(),
   receivingAddress: z.string(),
-  billingCycle: z.nativeEnum(TimeInterval),
+  billingCycle: z.nativeEnum(PlanInterval),
   imageUrl: z.string(),
   category: z.string(),
   remindMe: z.boolean(),
