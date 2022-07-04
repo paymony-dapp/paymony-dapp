@@ -1,7 +1,9 @@
 import React from 'react';
 import Layout from '../../../components/Layout';
-import Card from '../../../components/card/card';
-import { subscriptions } from '../../../data';
+import { subscriptions } from '../../../utils/data';
+import SubscriptionCard from '../../../components/card/SubscriptionCard';
+import Button from '../../../components/Button';
+import AddIcon from '../../../components/Icons/AddIcon';
 
 const Subscription = () => {
   return (
@@ -13,36 +15,18 @@ const Subscription = () => {
           </h4>
           <h4 className='text-gray-500'>Inactive</h4>
         </div>
-        <div className='text-white my-5 flex w-full justify-between items-center'>
-          <h2 className='font-bold text-3xl'>My Subscriptions</h2>
-          <div className=''>
-            <button className='border border-gray-100 py-3 px-5 rounded-lg mr-4 cursor-pointer'>
-              + Create Custom
-            </button>
-            <button className='bg-blue-500 text-white hover:bg-700 py-3 px-5 rounded-lg mr-4 cursor-pointer'>
-              + Add Subscription
-            </button>
+        <div className='text-white my-5 flex flex-col md:flex-row w-full justify-between items-center'>
+          <h2 className='font-bold text-xl md:text-3xl mb-2'>
+            My Subscriptions
+          </h2>
+          <div className='flex items-center space-x-2 md:space-x-4'>
+            <Button icon={AddIcon} text='Create Custom' variant='secondary' />
+            <Button icon={AddIcon} text='Add Subscription' />
           </div>
         </div>
-        <div className='grid sm:grid-col-2 md:grid-cols-5 lg:grid-col-5 gap-x-4 text-sm'>
-          {subscriptions.map((subscription) => (
-            <Card>
-              <img src={subscription.img} alt='' />
-              <h4 className='text-gray-200 py-3 text-lg font-semibold'>
-                {subscription.name}
-              </h4>
-              <div className='flex justify-between items-center'>
-                <div className='flex text-gray-400'>
-                  <div className=' border-green-500 text-white h-6 w-6 rounded-full flex justify-center items-center border-2 mr-3'>
-                    {subscription.num}
-                  </div>
-                  <span>days left</span>
-                </div>
-                <span className='text-gray-400 font-medium text-sm'>
-                  8$/monthly
-                </span>
-              </div>
-            </Card>
+        <div className='grid sm:grid-col-3 md:grid-cols-3 xl:grid-cols-4 gap-x-4 text-sm'>
+          {subscriptions.map(({ id, img, name, num }) => (
+            <SubscriptionCard key={id} image={img} name={name} num={num} />
           ))}
         </div>
       </section>
