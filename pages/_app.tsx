@@ -2,7 +2,7 @@ import '../styles/index.css';
 import type { AppProps } from 'next/app';
 import { withTRPC } from '@trpc/next';
 import { API_URL } from '../utils/config';
-import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
+import { httpLink } from '@trpc/client/links/httpLink';
 import App from 'next/app';
 import { AppRouter } from '../server/routes/app.route';
 import superjson from 'superjson';
@@ -13,13 +13,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default withTRPC<AppRouter>({
   config({ ctx }) {
     const url = API_URL;
-
-    const links = [
-      httpBatchLink({
-        maxBatchSize: 10,
-        url,
-      }),
-    ];
 
     return {
       queryClientConfig: {
@@ -39,7 +32,11 @@ export default withTRPC<AppRouter>({
         return {};
       },
       transformer: superjson,
-      links,
+      links: [
+        httpLink({
+          url,
+        }),
+      ],
     };
   },
 })(MyApp);

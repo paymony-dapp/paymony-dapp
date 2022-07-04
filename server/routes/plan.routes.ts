@@ -30,7 +30,8 @@ export const planRouter = createRouter()
     },
   })
   .query('plans', {
-    async resolve() {
+    input: String,
+    async resolve({ input }) {
       const plans = await planService.getAllPlans();
       return plans;
     },
