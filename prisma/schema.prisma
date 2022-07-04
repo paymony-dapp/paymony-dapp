@@ -48,6 +48,7 @@ model Plan {
   description  String       @db.Text
   isPublic     Boolean      @default(false)
   accessUrl    String
+  logoUrl      String?
 
   active    Boolean  @default(true)
   createdAt DateTime @default(now())

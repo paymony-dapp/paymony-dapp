@@ -5,20 +5,15 @@ import {
   OakChains,
 } from '../../utils/types';
 import { CreateSubscriptionType } from '../schemas/subscriptionSchema';
-import { RecurringPaymentTask } from '../tasks/recurringPaymentTask';
 import { Scheduler, Constants } from 'oak-js-library';
 import { Signer } from '@polkadot/api/types';
 
 export class SubscriptionService {
   private startRecurringPayments() {}
-  private recurrer = new RecurringPaymentTask();
 
   // Create subscription
 
-  createSubscription = async (
-    transferParameters: CreateSubscriptionType,
-    interval: PlanInterval
-  ) => {
+  createSubscription = async (transferParameters: CreateSubscriptionType) => {
     const {
       amount,
       category,
@@ -26,6 +21,7 @@ export class SubscriptionService {
       receivingAddress,
       subscriberAddress,
       title,
+      billingCycle,
       hex,
       imageUrl,
     } = transferParameters;
@@ -37,7 +33,7 @@ export class SubscriptionService {
     const sub = await prismaClient.subscriptions.create({
       data: {
         amount,
-        billingCycle: interval,
+        billingCycle,
         category,
         signingAddress,
         subscriberAddress,
@@ -57,6 +53,12 @@ export class SubscriptionService {
       where: {
         id: subId,
       },
+    });
+  }
+
+  async getWalletSubscriptions(address: string) {
+    return await prismaClient.subscriptions.findMany({
+      where: { subscriberAddress: address },
     });
   }
 

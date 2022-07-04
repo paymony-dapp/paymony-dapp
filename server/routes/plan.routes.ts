@@ -35,7 +35,7 @@ export const planRouter = createRouter()
       return plans;
     },
   })
-  .query('create', {
+  .mutation('create', {
     input: createPlanSchema,
     async resolve({ input }) {
       const planLink = await planService.createPlan(input);
