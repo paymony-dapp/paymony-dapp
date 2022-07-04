@@ -1,12 +1,10 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
-import { TimeInterval } from '../../utils/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from '../Layout/Header';
 import WalletModal from '../Modals/WalletModal';
 import { useWalletModal } from '../../store/walletModalStore';
-import useWallet from '../../hooks/useWallet';
 import { useWalletStore } from '../../store/walletStore';
 
 interface PlanDetialsCardProps {
