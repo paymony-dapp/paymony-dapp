@@ -93,12 +93,14 @@ export enum OakChains {
   TUR = 'TUR',
 }
 
-export enum TimeInterval {
-  HOURLY = 'HOURLY',
-  DAILY = 'DAILY',
-  WEEKLY = 'WEEKLY',
-  MONTHLY = 'MONTHLY',
+export enum PlanInterval {
+  HOURLY = 'HOURLY' ,
+  DAILY =  'DAILY' ,
+  WEEKLY ='WEEKLY' ,
+  MONTHLY = 'MONTHLY'
 }
+  
+
 
 export enum OakChainSchedulingLimit {
   STUR = 6 * 30 * 24 * 60 * 60 * 1000,

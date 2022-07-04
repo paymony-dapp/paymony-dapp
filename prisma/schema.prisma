@@ -61,4 +61,5 @@ enum PlanInterval {
   WEEKLY
   MONTHLY
   YEARLY
+  DAILY
 }
