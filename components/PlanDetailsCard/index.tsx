@@ -3,6 +3,11 @@ import Head from 'next/head';
 import { TimeInterval } from '../../utils/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import Header from '../Layout/Header';
+import WalletModal from '../Modals/WalletModal';
+import { useWalletModal } from '../../store/walletModalStore';
+import useWallet from '../../hooks/useWallet';
+import { useWalletStore } from '../../store/walletStore';
 
 interface PlanDetialsCardProps {
   name: string;
@@ -21,11 +26,28 @@ const PlanDetialsCard: FC<PlanDetialsCardProps> = ({
   description,
   active,
 }) => {
+  const showWalletModal = useWalletModal((state) => state.toggled);
+  const connected = useWalletStore((state) => state.connected);
+  const setToggleModal = useWalletModal((state) => state.toggleModal);
+
+  const handlePay = () => {
+    if (!connected) {
+      setToggleModal(true);
+    }
+  };
+
   return (
     <>
       <Head>
         <title>Subscribe to {name} with Paymony</title>
       </Head>
+      <div className='fixed top-0 inset-x-0'>
+        <WalletModal
+          show={showWalletModal}
+          toggle={() => setToggleModal(false)}
+        />
+        {connected && <Header hide />}
+      </div>
       <section className='h-screen w-screen flex flex-col  pt-20 md:pt-24 lg:pt-32 items-center space-y-4'>
         <div className='w-11/12 max-w-[668px] p-8 md:p-16 bg rounded-3xl'>
           <p className='text-sm text-zinc-200 text-right float-right'>
@@ -68,7 +90,10 @@ const PlanDetialsCard: FC<PlanDetialsCardProps> = ({
               <option value={4}>4</option>
             </select>
           </div>
-          <button className='appearance-none bg-blue-600 text-white text-center font-semibold w-full rounded-md py-4'>
+          <button
+            onClick={handlePay}
+            className='appearance-none bg-blue-600 text-white text-center font-semibold w-full rounded-md py-4'
+          >
             Subscribe
           </button>
         </div>
