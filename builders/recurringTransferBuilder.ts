@@ -7,7 +7,7 @@ import {
 import { Recurrer, Scheduler } from 'oak-js-library';
 import { Signer, AddressOrPair } from '@polkadot/api/types';
 import { HexString } from '@polkadot/util/types';
-import uuid, { validate } from 'uuid';
+import uuid from 'uuid';
 
 /**
  * This feature schedules payment task and builds the schedule

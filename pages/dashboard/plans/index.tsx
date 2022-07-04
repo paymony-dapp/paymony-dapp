@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '../../../components/Button';
 import PlanCard from '../../../components/card/PlanCard';
-import SubscriptionCard from '../../../components/card/SubscriptionCard';
 import AddIcon from '../../../components/Icons/AddIcon';
 import Layout from '../../../components/Layout';
 import { subscriptions } from '../../../utils/data';

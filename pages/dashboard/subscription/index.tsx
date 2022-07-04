@@ -24,7 +24,7 @@ const Subscription = () => {
             <Button icon={AddIcon} text='Add Subscription' />
           </div>
         </div>
-        <div className='grid sm:grid-col-3 md:grid-cols-3 lg:grid-col-4 gap-x-4 text-sm'>
+        <div className='grid sm:grid-col-3 md:grid-cols-3 xl:grid-cols-4 gap-x-4 text-sm'>
           {subscriptions.map(({ id, img, name, num }) => (
             <SubscriptionCard key={id} image={img} name={name} num={num} />
           ))}
