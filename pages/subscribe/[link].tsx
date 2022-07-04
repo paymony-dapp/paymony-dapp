@@ -49,9 +49,7 @@ const PlanPage: NextPage = () => {
       } catch (error) {
         setError(true);
         if (error instanceof TRPCClientError) {
-          if (error.data.code === 'NOT_FOUND') {
-            setErrorMessage('Sorry, this plan cannot be found');
-          }
+          setErrorMessage('Sorry, this plan cannot be found');
         } else {
           setErrorMessage('Error occured fetching plan');
         }
@@ -72,11 +70,12 @@ const PlanPage: NextPage = () => {
       ) : plan ? (
         <PlanDetialsCard
           active={plan.active}
-          billingCycle={plan.billingCycle.toString().toLowerCase()}
+          billingCycle={plan.billingCycle as any}
           amount={plan.amount}
           category={plan.category}
           description={plan.description}
           name={plan.name!}
+          address={plan.userWallet}
         />
       ) : error ? (
         <ErrorState errorMessage={errorMessage} />

@@ -19,6 +19,7 @@
     "@trpc/next": "^9.25.3",
     "@trpc/react": "^9.25.3",
     "@trpc/server": "^9.25.3",
+    "formik": "^2.2.9",
     "next": "^12.2.0",
     "oak-js-library": "github:OAK-Foundation/OAK-JS-SDK#0.1.0-frontend",
     "react": "17.0.2",

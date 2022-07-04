@@ -64,6 +64,7 @@ export class PlanService {
         id: planId,
       },
       data: {
+        active: !plan.active,
         isPublic: !plan?.isPublic,
       },
     });

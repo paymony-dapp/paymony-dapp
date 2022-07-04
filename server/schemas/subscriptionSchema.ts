@@ -7,12 +7,16 @@ export const createSubscriptionSchema = z.object({
   title: z.string().max(30, 'Title is too long'),
   amount: z.number().positive('Amount cannot be negative'),
   signingAddress: z.string(),
-  receivingAddress: z.string(), 
+  receivingAddress: z.string(),
   hex: z.string(),
   billingCycle: z.nativeEnum(PlanInterval),
-  imageUrl: z.string().url('Invalid image url').default(generateAvatar()),
+  imageUrl: z
+    .string()
+    .url('Invalid image url')
+    .default(generateAvatar())
+    .nullable(),
   category: z.string().default('Subscription'),
-  remindMe: z.boolean().default(false),
+  remindMe: z.boolean().default(false).nullable(),
   subscriberAddress: z.string(),
 });
 

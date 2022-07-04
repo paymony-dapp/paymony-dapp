@@ -6,20 +6,24 @@ import Header from '../Layout/Header';
 import WalletModal from '../Modals/WalletModal';
 import { useWalletModal } from '../../store/walletModalStore';
 import { useWalletStore } from '../../store/walletStore';
+import useSubscribe from '../../hooks/useSubscribe';
+import { PlanInterval } from '../../utils/types';
 
 interface PlanDetialsCardProps {
   name: string;
   amount: number;
-  billingCycle: string;
+  billingCycle: PlanInterval;
   category: string;
   description: string;
   active: boolean;
+  address: string;
 }
 
 const PlanDetialsCard: FC<PlanDetialsCardProps> = ({
   name,
   amount,
   billingCycle,
+  address,
   category,
   description,
   active,
@@ -28,9 +32,13 @@ const PlanDetialsCard: FC<PlanDetialsCardProps> = ({
   const connected = useWalletStore((state) => state.connected);
   const setToggleModal = useWalletModal((state) => state.toggleModal);
 
-  const handlePay = () => {
+  const { handleSubscribe } = useSubscribe();
+
+  const handlePay = async () => {
     if (!connected) {
       setToggleModal(true);
+    } else {
+      await handleSubscribe(amount, billingCycle, 2, address, name, category);
     }
   };
 
@@ -92,7 +100,7 @@ const PlanDetialsCard: FC<PlanDetialsCardProps> = ({
             onClick={handlePay}
             className='appearance-none bg-blue-600 text-white text-center font-semibold w-full rounded-md py-4'
           >
-            Subscribe
+            {!connected ? 'Connect your wallet to pay' : 'Subscribe'}
           </button>
         </div>
         <Link href='/'>

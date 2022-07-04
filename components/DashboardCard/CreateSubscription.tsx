@@ -2,6 +2,8 @@ import React, { Dispatch, FC, SetStateAction } from 'react';
 import Modal from '../Modals/index';
 import CalendarIcon from '../Icons/CalendarIcon';
 import DollarIcon from '../Icons/DollarIcon';
+import { useFormik } from 'formik';
+import useSubscribe from '../../hooks/useSubscribe';
 
 interface CreateSubscriptionProps {
   show: boolean;
@@ -9,21 +11,60 @@ interface CreateSubscriptionProps {
 }
 
 const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
+  const { handleSubscribe } = useSubscribe();
+
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      amount: '',
+      billingInterval: '',
+      receivingAddress: '',
+      recurrence: '',
+      startDate: '',
+      category: '',
+      description: '',
+    },
+    onSubmit: ({
+      title,
+      amount,
+      billingInterval,
+      recurrence,
+      category,
+      startDate,
+      description,
+      receivingAddress,
+    }) => {
+      handleSubscribe(
+        +amount,
+        billingInterval as any,
+        +recurrence,
+        receivingAddress,
+        title,
+        category,
+        +startDate
+      );
+    },
+  });
+
   return (
     <Modal
       title='Recurrent Payments'
       isOpen={props.show}
       setIsOpen={props.setShow}
     >
-      <form action='' className=''>
+      <form onSubmit={formik.handleSubmit} className=''>
         <div className='flex flex-col md:flex-row justify-between items-center'>
           <div className='mr-3 w-full'>
-            <label htmlFor='Title' className=' text-white'>
+            <label htmlFor='title' className=' text-white'>
               Title
             </label>
             <div className='relative'>
               <input
                 type='text'
+                name='title'
+                onChange={formik.handleChange}
+                value={formik.values.title}
+                onBlur={formik.handleBlur}
                 className='w-full my-2 p-4  text-sm border-gray-200 rounded-lg shadow-sm bg border-0 outline-none text-white'
                 placeholder='David’s Stipend'
               />
@@ -31,18 +72,23 @@ const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
           </div>
           <div className='flex w-full items-center'>
             <select
+              onChange={formik.handleChange}
+              name='billingCycle'
               className='w-full my-2 p-4  text-sm border-gray-200 rounded-lg shadow-sm bg text-white outline-none border-0 mr-6 disabled'
-              disabled
             >
-              <option value=''>1</option>
-              <option value=''>1</option>
-              <option value=''>1</option>
+              <option value='HOURLY'>Hourly</option>
+              <option value='DAILY'>Daily</option>
+              <option value='WEEKLY'>Weekly</option>
+              <option value='MONTHLY'>Monthly</option>
             </select>
-            <select className='w-full my-2 p-4 text-sm border-gray-200 rounded-lg shadow-sm bg text-white outline-none border-0'>
-              <option value=''>1</option>
-              <option value=''>1</option>
-              <option value=''>1</option>
-              <option value=''>1</option>
+            <select
+              onChange={formik.handleChange}
+              name='recurrence'
+              className='w-full my-2 p-4 text-sm border-gray-200 rounded-lg shadow-sm bg text-white outline-none border-0'
+            >
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
+                <option value={i}>{i}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -53,7 +99,9 @@ const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
             </label>
             <div className='relative'>
               <input
-                type='text'
+                type='number'
+                name='amount'
+                onChange={formik.handleChange}
                 className='w-full my-2 p-4 pl-12 text-sm border-gray-200 rounded-lg shadow-sm bg  border-0 outline-none text-white'
                 placeholder='e.g $100'
               />
@@ -68,7 +116,9 @@ const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
             </label>
             <div className='relative'>
               <input
-                type='text'
+                type='number'
+                name='startDate'
+                onChange={formik.handleChange}
                 className='w-full my-2 p-4 pl-12 text-sm border-gray-200 rounded-lg shadow-sm bg  border-0 outline-none text-white'
                 placeholder='Select Date'
               />
@@ -86,6 +136,7 @@ const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
             <div className='relative'>
               <input
                 type='text'
+                name='receivingAddress'
                 className='w-full my-2 p-4 pl-12 text-sm border-gray-200 rounded-lg shadow-sm bg  border-0 outline-none text-white'
                 placeholder='Enter wallet address (Oak network)'
               />
@@ -115,10 +166,17 @@ const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
             <label htmlFor='Title' className='text-white py-6 my-6'>
               Category
             </label>
-            <select className='w-full p-4 my-2  text-sm border-gray-200 rounded-lg shadow-sm bg text-white outline-none border-0'>
-              <option defaultChecked>e.g Miscellenous</option>
-              <option value=''>1</option>
-              <option value=''>1</option>
+            <select
+              onChange={formik.handleChange}
+              name='category'
+              placeholder='eg. Miscellenous'
+              className='w-full p-4 my-2  text-sm border-gray-200 rounded-lg shadow-sm bg text-white outline-none border-0'
+            >
+              <option value='Bills'>Bills</option>
+              <option value='DAO membership'>DAO Membership</option>
+              <option value='Donations'>Donations</option>
+              <option value='Utility'>Utility</option>
+              <option value='Payroll'>Payroll</option>
             </select>
           </div>
           <div className='w-full'>
@@ -126,21 +184,23 @@ const CreateSubscription: FC<CreateSubscriptionProps> = (props) => {
               Remind
             </label>
             <select className='w-full p-4 my-2 text-sm border-gray-200 rounded-lg shadow-sm bg text-white outline-none border-0'>
-              <option defaultChecked>Remind me</option>
-              <option value=''>1</option>
-              <option value=''>1</option>
-              <option value=''>1</option>
+              <option value='Yes' defaultChecked>
+                Remind me
+              </option>
+              <option value='No'>No Reminders</option>
             </select>
           </div>
         </div>
         <div className='flex flex-col md:flex-row justify-between items-center'>
           <div className='my-6 w-full'>
-            <label htmlFor='Title' className=' text-white py-8'>
+            <label htmlFor='description' className=' text-white py-8'>
               Descriptiion
             </label>
             <div className='relative'>
               <textarea
+                name='description'
                 rows={3}
+                onChange={formik.handleChange}
                 className='w-full p-4 my-2  text-sm border-gray-200 rounded-lg shadow-sm bg border-0 outline-none text-white resize-none'
                 placeholder='David’s Stipend'
               ></textarea>

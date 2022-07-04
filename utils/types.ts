@@ -95,9 +95,10 @@ export enum OakChains {
 
 export enum PlanInterval {
   HOURLY = 'HOURLY',
-  DAILY = 'DAILY',
+  // DAILY = 'DAILY',
   WEEKLY = 'WEEKLY',
   MONTHLY = 'MONTHLY',
+  YEARLY = 'YEARLY',
 }
 
 export enum OakChainSchedulingLimit {

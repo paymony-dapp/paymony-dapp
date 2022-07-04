@@ -1,24 +1,18 @@
 import { prismaClient } from '../../utils/prismaClient'; // db client
-import {
-  NativeTransferPayload,
-  PlanInterval,
-  OakChains,
-} from '../../utils/types';
+import { OakChains } from '../../utils/types';
 import { CreateSubscriptionType } from '../schemas/subscriptionSchema';
-import { RecurringPaymentTask } from '../tasks/recurringPaymentTask';
-import { Scheduler, Constants } from 'oak-js-library';
 import { Signer } from '@polkadot/api/types';
+import { generateAvatar } from '../../utils/generateAvatar';
 
 export class SubscriptionService {
   private startRecurringPayments() {}
-  private recurrer = new RecurringPaymentTask();
 
   // Create subscription
 
-  createSubscription = async (
-    transferParameters: CreateSubscriptionType,
-    interval: PlanInterval
-  ) => {
+  createSubscription = async (transferParameters: CreateSubscriptionType) => {
+    const { Scheduler } = await import('oak-js-library');
+
+    const scheduler = new Scheduler(OakChains.STUR);
     const {
       amount,
       category,
@@ -26,25 +20,25 @@ export class SubscriptionService {
       receivingAddress,
       subscriberAddress,
       title,
+      billingCycle,
       hex,
       imageUrl,
     } = transferParameters;
 
     //const customErrorHandler = (result) => {...} @Todo
-    const backendScheduler = new Scheduler(Constants.OakChains.NEU);
-    const txHash = await backendScheduler.sendExtrinsic(hex);
+    const txHash = await scheduler.sendExtrinsic(hex);
 
-    const sub = await prismaClient.subscriptions.create({
+    prismaClient.subscriptions.create({
       data: {
         amount,
-        billingCycle: interval,
+        billingCycle,
         category,
         signingAddress,
         subscriberAddress,
         recievingAddress: receivingAddress,
         title,
         txHash,
-        imageUrl,
+        imageUrl: imageUrl ? imageUrl : generateAvatar(),
         startDate: new Date(),
         active: true,
       },
@@ -57,6 +51,12 @@ export class SubscriptionService {
       where: {
         id: subId,
       },
+    });
+  }
+
+  async getWalletSubscriptions(address: string) {
+    return await prismaClient.subscriptions.findMany({
+      where: { subscriberAddress: address },
     });
   }
 
@@ -85,8 +85,11 @@ export class SubscriptionService {
   }
 
   cancelSubscription = async (subId: string, signer: Signer) => {
+    const { Scheduler } = await import('oak-js-library');
+
+    const scheduler = new Scheduler(OakChains.STUR);
+
     const subcription = await this.getSubcription(subId);
-    const scheduler = new Scheduler(Constants.OakChains.NEU);
     const txHash = await scheduler.getTaskID(
       subcription.signingAddress,
       subcription?.txHash
