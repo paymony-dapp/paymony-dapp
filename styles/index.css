@@ -11,3 +11,7 @@ body {
 .bg {
   background: #1d2434;
 }
+
+.bg:disabled {
+  background-color: #5b6174;
+}

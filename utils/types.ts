@@ -94,13 +94,11 @@ export enum OakChains {
 }
 
 export enum PlanInterval {
-  HOURLY = 'HOURLY' ,
-  DAILY =  'DAILY' ,
-  WEEKLY ='WEEKLY' ,
-  MONTHLY = 'MONTHLY'
+  HOURLY = 'HOURLY',
+  DAILY = 'DAILY',
+  WEEKLY = 'WEEKLY',
+  MONTHLY = 'MONTHLY',
 }
-  
-
 
 export enum OakChainSchedulingLimit {
   STUR = 6 * 30 * 24 * 60 * 60 * 1000,
@@ -122,4 +120,19 @@ export interface NativeTransferAction {
   signer: any;
   providedId: string;
   timestamps: string[];
+}
+
+export interface Plan {
+  id: string;
+  name: string | null;
+  amount: number;
+  billingCycle: PlanInterval;
+  category: string;
+  description: string;
+  isPublic: boolean;
+  accessUrl: string;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  userWallet: string;
 }

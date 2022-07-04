@@ -7,7 +7,7 @@ import PlanDetialsCard from '../../components/PlanDetailsCard';
 import Skeleton from '../../components/Skeleton';
 import { trpcApiClient } from '../../utils/trpcClient';
 
-type PlanInterval = 'HOURLY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
+type PlanInterval = 'HOURLY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
 
 type Plan = {
   id: string;
