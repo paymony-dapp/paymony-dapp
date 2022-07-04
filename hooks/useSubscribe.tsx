@@ -1,8 +1,10 @@
 import { Wallet } from '@talisman-connect/wallets';
 import React from 'react';
+import { CreateSubscriptionType } from '../server/schemas/subscriptionSchema';
 // import { RecurringTransferBuilder } from '../lib/recurringTransferBuilder';
 import { useWalletStore } from '../store/walletStore';
 import { TURUNIT } from '../utils/config';
+import { trpcApiClient } from '../utils/trpcClient';
 import {
   DateOfMonth,
   DayOfWeek,
@@ -19,16 +21,17 @@ enum SubscriptionProcessStatus {
 }
 
 const useSubscribe = () => {
-  const wallet = useWalletStore((store) => store.wallet);
   const walletAddress = useWalletStore((store) => store.walletAddress);
 
-  const signTransaction = () => {
-    if (wallet?.sign) {
-      return wallet.sign(walletAddress, `Subscribe to this plan`);
+  const createSubscription = async (transferParams: CreateSubscriptionType) => {
+    try {
+      await trpcApiClient.mutation('subscriptions.create', transferParams);
+    } catch (error) {
+      throw error;
     }
   };
 
-  const generateExtrinsicHexAndSend = async (
+  const generateExtrinsicHex = async (
     tranferParameters: NativeTransferPayload,
     billingCycle: PlanInterval,
     period?: number
@@ -96,7 +99,7 @@ const useSubscribe = () => {
       try {
         const turAmount = amount * TURUNIT;
 
-        await generateExtrinsicHexAndSend(
+        const hex = await generateExtrinsicHex(
           {
             amount: turAmount,
             receiverAddress,
@@ -107,6 +110,19 @@ const useSubscribe = () => {
           billingInterval,
           period
         );
+
+        await createSubscription({
+          amount,
+          billingCycle: billingInterval,
+          receivingAddress: receiverAddress,
+          category,
+          title,
+          hex: hex as string,
+          imageUrl: null,
+          remindMe: false,
+          signingAddress: walletAddress,
+          subscriberAddress: walletAddress,
+        });
       } catch (error) {
         console.log(error);
       }
