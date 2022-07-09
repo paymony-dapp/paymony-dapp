@@ -9,9 +9,8 @@ import AddIcon from '../../../components/Icons/AddIcon';
 import Layout from '../../../components/Layout';
 import Skeleton from '../../../components/Skeleton';
 import { useWalletStore } from '../../../store/walletStore';
-import { subscriptions } from '../../../utils/data';
 import { generateAvatar } from '../../../utils/generateAvatar';
-import { trpcApiClient, trpcHookClient } from '../../../utils/trpcClient';
+import { trpcApiClient } from '../../../utils/trpcClient';
 
 const Plans = () => {
   const [show, setShow] = useState<boolean>(false);
@@ -19,12 +18,14 @@ const Plans = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const walletAddress = useWalletStore((state) => state.walletAddress);
+
   useEffect(() => {
     const getPlans = async () => {
       try {
         setIsError(false);
         setIsLoading(true);
-        const plans = await trpcApiClient.query('plans.plans', '');
+        const plans = await trpcApiClient.query('plans.plans', walletAddress);
         if (plans) {
           setPlans(plans);
         }
@@ -35,7 +36,7 @@ const Plans = () => {
       }
     };
     getPlans();
-  }, []);
+  }, [walletAddress]);
 
   return (
     <Layout>

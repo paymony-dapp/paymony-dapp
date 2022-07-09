@@ -88,7 +88,14 @@ export class PlanService {
     });
   }
 
-  async getAllPlans(): Promise<Plan[]> {
+  async getAllPlans(address?: string): Promise<Plan[]> {
+    if (address) {
+      return await prismaClient.plan.findMany({
+        where: {
+          userWallet: address,
+        },
+      });
+    }
     return await prismaClient.plan.findMany();
   }
 }
