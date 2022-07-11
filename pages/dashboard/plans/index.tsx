@@ -68,7 +68,7 @@ const Plans = () => {
               <PlanCard
                 key={id}
                 image={logoUrl || generateAvatar()}
-                name={name || 'Planx'}
+                name={name!}
                 num={amount}
                 amount={amount}
               />
